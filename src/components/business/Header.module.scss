@@ -1,0 +1,98 @@
+@import "../../style/constant";
+@mixin yellow500 {
+  color: $lightYellow;
+  font-weight: 500;
+  padding-left: 8.533vw;
+  &:before {
+    content: ".";
+    font-size: 0;
+    line-height: 0;
+    display: block;
+    position: absolute;
+    width: 4.8vw;
+    height: 4.8vw;
+    left: 2.667vw;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    background-size: 100% 100%;
+  }
+}
+.navHide {
+
+}
+.navWrapper {
+ z-index: 8;
+ height: 11.733vw;
+ position: fixed;
+ left: 0;
+ top: 0;
+ width: 100vw;
+}
+.hidden {
+ height: 100%;
+ width: 100%;
+ overflow: hidden;
+ position: relative;
+}
+.navBar {
+  height: 16.533vw;
+  padding: 0 $padding1;
+  z-index: 9;
+  display: flex;
+  justify-content: left;
+  transition: all .3s ease-out;
+  overflow: auto;
+  background-color: $blue;
+}
+.navItem {
+  display: inline-block;
+  flex-shrink: 0; // 0 宽度小于父元素，不进行缩放
+    line-height: 11.733vw;
+    padding: 0 $padding1;
+    height: 11.733vw;
+    text-align: center;
+    font-size: 4.267vw;
+    color: $lightWhite;
+    position: relative; // 为了before定位
+}
+.itemHome {
+  @include yellow500();
+  &:before {
+    background-image: url(https://mat1.gtimg.com/news/images/inews/2020/feiyan/area/icon_guonei2.png);
+  }
+}
+.itemOversea {
+  @include yellow500();
+  &:before {
+    background-image: url(https://mat1.gtimg.com/news/images/inews/2020/feiyan/area/icon_quanqiu2.png);
+  }
+}
+.itemHubei {
+  @include yellow500();
+  &:before {
+    background-image: url(https://mat1.gtimg.com/news/images/inews/2020/feiyan/area/icon_sheng2.png);
+  }
+}
+.view {
+  transform: translateZ(0);
+}
+.active {
+  color: #fff;
+  font-weight: 500;
+  &:after {
+    content: ".";
+    font-size: 0;
+    line-height: 0;
+    display: block;
+    position: absolute;
+    width: 8vw;
+    height: .533vw;
+    border-radius: 1.067vw;
+    background-color: #ffeaa6;
+    top: 10.133vw;
+    left: 50%;
+    transform: translate(-50%);
+  }
+}
+

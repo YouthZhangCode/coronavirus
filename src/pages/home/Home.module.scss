@@ -1,0 +1,230 @@
+@import '../../style/constant';
+
+.wrapper {
+  width: 100vw;
+  overflow: hidden;
+}
+
+@mixin headJump {
+  height: 6.933vw;
+  position: absolute;
+  top: 4vw;
+}
+
+@mixin enterRightLine {
+  width: 1px;
+  height: 4.8vw;
+  background-color: #d8e6ff;
+  right: 0;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+@mixin enterLeftLayout {
+  content: ".";
+  font-size: 0;
+  line-height: 0;
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  background-size: 100% 100%;
+  width: 5.867vw;
+  height: 5.867vw;
+}
+
+.head {
+  height: 40.8vw;
+  position: relative;
+  &:before {
+    content: '.';
+    font-size: 0;
+    line-height: 0;
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    height: 48.533vw;
+    background: url(https://mat1.gtimg.com/news/feiyanarea/head_bg_new.png) top;
+    background-size: cover;
+  }
+  .logo {
+    width: 21.333vw;
+    height: 4.8vw;
+    position: absolute;
+    left: 2 * $padding1;
+    top: 5.067vw;
+    background: url(https://mat1.gtimg.com/news/feiyanarea/head_logo.png);
+    background-size: 100% 100%;
+  }
+  .title {
+    width: 50.667vw;
+    height: 16.533vw;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    top: 14.933vw;
+    background: url(https://mat1.gtimg.com/news/images/inews/2020/feiyan/area/head_title.png);
+    background-size: 100% 100%;
+  }
+  .jump {
+    @include headJump();
+    width: 22.4vw;
+    background: url(https://mat1.gtimg.com/news/feiyanarea/head_more.png);
+    background-size: 100% 100%;
+    right: 0;
+  }
+  .jump_zhuizong {
+    @include headJump();
+    width: 17.6vw;
+    background: url(https://mat1.gtimg.com/news/images/inews/2020/feiyan/area/head_zz2.png);
+    background-size: 100% 100%;
+    right: 24vw;
+  }
+  .qs {
+    line-height: 3.733vw;
+    height: 3.733vw;
+    font-size: 3.2vw;
+    color: #fff;
+    position: absolute;
+    left: 5.333vw;
+    right: 5.333vw;
+    bottom: 4vw;
+    text-align: center;
+  }
+}
+@mixin show {
+  display: block;
+}
+.marqueeWarp {
+  background-color: #ffffff;
+  padding-top: 1px;
+  border-radius: 3.2vw;
+  position: relative;
+  @include show();
+}
+
+.marquee {
+  border-radius: 3.2vw;
+  position: relative;
+  width: 90.133vw;
+  height: 10.133vw;
+  margin: 4vw auto 0;
+  padding: 0 5.333vw;
+  box-sizing: border-box;
+  background: url(https://mat1.gtimg.com/news/images/inews/2020/feiyan/18/img/marquee-bg-none.png) #f8f8f8 50% no-repeat;
+  background-size: 90.133vw 10.133vw;
+  font-size: 4vw;
+}
+.marqueeTab {
+  position: absolute;
+  color: #737373;
+  left: 9.733vw;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 76vw;
+  font-size: 3.2vw;
+  overflow: hidden;
+  font-weight: 400;
+  height: 4.667vw;
+  a {
+    color: $textColor222;
+  }
+}
+
+.timeNum {
+  padding: 4vw 2 * $padding1;
+  background-color: #ffffff;
+  line-height: 3.733vw;
+  font-size: 3.2vw;
+  color: $textColor737;
+  span {
+    color: $textColor222;
+    font-weight: 500;
+  }
+}
+
+.recentNumWrap {
+  padding-bottom: 4vw;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.recentNumContent {
+  width: 29.6vw;
+  margin: 0 .533vw .533vw 0;
+  overflow: hidden;
+}
+.topLeftRadius {
+  border-radius: 1.6vw 0 0 0;
+}
+
+.topRightRadius {
+  border-radius: 0 1.6vw 0 0;
+}
+.bottomLeftRadius {
+  border-radius: 0 0 0 1.6vw;
+}
+.bottomRightRadius {
+  border-radius: 0 0 1.6vw 0;
+}
+
+.enterWrap {
+  display: flex;
+  height: 11.2vw;
+  margin: 0 5.333vw 1.333vw;
+  border-radius: 1.6vw;
+  background-color: #eef4ff;
+  text-align: center;
+  a {
+    flex: 1;
+    position: relative;
+    line-height: 11.2vw;
+    font-weight: 300;
+    font-size: 3.733vw;
+    span {
+      padding: 0 0 0 6.933vw;
+      position: relative;
+    }
+  }
+  .first {
+    &:before {
+      @include absoluteLayout;
+      @include enterRightLine;
+    }
+  }
+  .mid {
+    &:before {
+      @include absoluteLayout;
+      @include enterRightLine;
+    }
+  }
+  .firstIcon {
+    &:before{
+      @include enterLeftLayout;
+      background-image: url(https://mat1.gtimg.com/news/feiyanarea/icon_rili.png);
+    }
+  }
+  .midIcon {
+    &:before {
+      @include enterLeftLayout;
+      background-image: url(https://mat1.gtimg.com/news/images/inews/2020/feiyan/area/icon_crj.png);
+    }
+  }
+  .lastIcon {
+    &:before {
+      @include enterLeftLayout;
+      background-image: url(https://mat1.gtimg.com/news/images/inews/2020/feiyan/area/icon_kj.png);
+    }
+  }
+}
+
+.chinaMapWrap {
+  //position: relative;
+  margin: 2*$padding1 $padding1 $padding1;
+  height: 400px;
+}

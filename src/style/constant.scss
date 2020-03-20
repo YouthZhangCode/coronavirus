@@ -1,0 +1,50 @@
+$blue: #005dff;
+$lightWhite: hsla(0,0%,100%,.7);
+$lightYellow: #ffeaa6;
+$textColor222: #222;
+$textColor737: #737373;
+$padding1: 2.667vw;
+$fontSize1: 2.667vw;
+
+@mixin centerAbsolute {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+@mixin centerVerticalAbsolute {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+@mixin absoluteLayout {
+  content: ".";
+  font-size: 0;
+  line-height: 0;
+  position: absolute;
+}
+
+@mixin widthHeight($width, $height) {
+  width: $width;
+  height: $height;
+}
+
+:export {
+  blue: $blue;
+  lightWhite: $lightWhite;
+  lightYellow: $lightYellow;
+  textColor222: $textColor222;
+  textColor737: $textColor737;
+  padding1: $padding1;
+  fontSize1: $fontSize1;
+}

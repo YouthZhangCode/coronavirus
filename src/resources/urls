@@ -1,0 +1,34 @@
+
+At 省 省会
+KB 国家名 中英文
+de urls
+Dg Storage feiyan.uuid
+Rd App路由信息
+qd name:'hb' group:'湖北'
+je getGlobalData
+re jsonp loadjs format
+we 地方站
+frames Window
+mg pgv_si
+navigator
+
+
+
+
+
+countryData: "https://api.inews.qq.com/newsqa/v1/query/pubished/daily/list?country={country}&"
+globalData: "https://view.inews.qq.com/g2/getOnsInfo?name=disease_h5"
+othData: "https://view.inews.qq.com/g2/getOnsInfo?name=disease_other"
+newsList: "https://view.inews.qq.com/g2/getOnsInfo?name=wuwei_ww_time_line"
+cityWhite: "https://view.inews.qq.com/g2/getOnsInfo?name=wuwei_ww_city_list_order"
+areNewsList: "https://api.dreamreader.qq.com/news/v1/province/news/list?province_code={rpvcode}&page_size=10"
+uploadImage: "https://yc.static.qq.com/?service=App.Uplode_Uplode.uploads"
+piyaoList: "https://vp.fact.qq.com/loadmore?page={page}"
+piyaoDetail: "https://vp.fact.qq.com/miniArtData?id={id}"
+hospitalChina: "https://wechat.wecity.qq.com/api/THPneumoniaService/getHospitalProvince"
+hospitalArea: "https://wechat.wecity.qq.com/api/THPneumoniaService/getHospitalCityByProvince"
+areaChart: "https://api.inews.qq.com/newsqa/v1/query/pubished/daily/list?province={pro}&"
+cityChart: "https://api.inews.qq.com/newsqa/v1/query/pubished/daily/list?province={pro}&city={city}&"
+areaAddChart: "https://api.inews.qq.com/newsqa/v1/query/pubished/daily/list?province={pro}"
+countryNews: ""
+todayNotice: "https://view.inews.qq.com/g2/getOnsInfo?name=wuwei_ww_ww_today_notice"
