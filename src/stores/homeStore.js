@@ -14,6 +14,8 @@ export class HomeStore {
   @observable isShowAdd = false;
   @observable showAddSwitch = {}
   @observable areaTree = []
+  @observable chinaMapNowData = []
+  @observable chinaMapTotalData = []
 
   @observable chinaDayList = []
   @observable chinaDayAddList = []
@@ -30,35 +32,42 @@ export class HomeStore {
   @observable todayNotice = []
 
   @action loadTodayData() {
-    agent.Home.todayData()
-      .then(res => {
-        let resObj = JSON.parse(res.text)
-        if (resObj.ret === 0) {
-          console.log('today data ----- \n', JSON.parse(resObj.data))
-          return JSON.parse(resObj.data)
-        } else {
-          // throw
-        }
-      })
-      .then(action(({
-        lastUpdateTime,
-        chinaTotal,
-        chinaAdd,
-        isShowAdd,
-        showAddSwitch,
-        areaTree,
-        }) => {
+    return agent.Home.todayData()
+            .then(res => {
+              let resObj = JSON.parse(res.text)
+              if (resObj.ret === 0) {
+                console.log('today data ----- \n', JSON.parse(resObj.data))
+                return JSON.parse(resObj.data)
+              } else {
+                // throw
+              }
+            })
+            .then(action((data) => {
+              let {
+                lastUpdateTime,
+                chinaTotal,
+                chinaAdd,
+                isShowAdd,
+                showAddSwitch,
+                areaTree,
+              } = data
+              this.lastUpdateTime = lastUpdateTime;
+              this.chinaTotal = chinaTotal;
+              this.chinaAdd = chinaAdd;
+              this.isShowAdd = isShowAdd;
+              this.showAddSwitch = showAddSwitch;
+              this.areaTree = areaTree;
+              this.chinaMapNowData = areaTree[0] && areaTree[0].children.map(item => {
+                return {...item, value: item.total.confirm - item.total.dead - item.total.heal}
+              })
+              this.chinaMapTotalData = areaTree[0] && areaTree[0].children.map(item => {
+                return {...item, value: item.total.confirm}
+              })
+              return data
+            }))
+            .catch(e => {
 
-        this.lastUpdateTime = lastUpdateTime;
-        this.chinaTotal = chinaTotal;
-        this.chinaAdd = chinaAdd;
-        this.isShowAdd = isShowAdd;
-        this.showAddSwitch = showAddSwitch;
-        this.areaTree = areaTree;
-      }))
-      .catch(e => {
-
-      })
+            })
   }
 
   @action loadRecentData() {
