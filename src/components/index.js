@@ -5,8 +5,13 @@
  */
 import Header from './business/Header'
 import RecentNum from './business/RecentNum'
+import EchartWrap from './basic/EchartWrap'
 
 export {
+  // basic
+  EchartWrap,
+
+  // business
   Header,
-  RecentNum
+  RecentNum,
 }

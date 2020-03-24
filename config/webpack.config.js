@@ -298,7 +298,25 @@ module.exports = function(webpackEnv) {
         ...(modules.webpackAliases || {}),
       },
       plugins: [
-        // Adds support for installing with Plug'n'Play, leading to faster installs and adding
+        // Adds support for inimport { Carousel } from 'antd';
+        //
+        // ReactDOM.render(
+        //   <Carousel effect="fade">
+        //     <div>
+        //       <h3>1</h3>
+        //     </div>
+        //     <div>
+        //       <h3>2</h3>
+        //     </div>
+        //     <div>
+        //       <h3>3</h3>
+        //     </div>
+        //     <div>
+        //       <h3>4</h3>
+        //     </div>
+        //   </Carousel>,
+        //   mountNode,
+        // );stalling with Plug'n'Play, leading to faster installs and adding
         // guards against forgotten dependencies and such.
         PnpWebpackPlugin,
         // Prevents users from importing files from outside of src/ (or node_modules/).
@@ -379,7 +397,14 @@ module.exports = function(webpackEnv) {
                         },
                       },
                     },
-                  ],
+                  ],[
+                    require.resolve('babel-plugin-import'),
+                    {
+                      "libraryName": "antd",
+                      "libraryDirectory": "es",
+                      "style": "css" // `style: true` 会加载 less 文件
+                    }
+                  ]
                 ],
                 // This is a feature of `babel-loader` for webpack (not Babel itself).
                 // It enables caching results in ./node_modules/.cache/babel-loader/

@@ -4,7 +4,9 @@
  * @Author: Youth
  */
 import { observable, action } from 'mobx'
+
 import agent from '../agent'
+import * as EchartsOptions from '../common/EchartsOptions'
 
 export class HomeStore {
 
@@ -30,6 +32,8 @@ export class HomeStore {
   @observable cityStatis = {}
 
   @observable todayNotice = []
+
+  @observable chinaAddConfirmSuspectOption = EchartsOptions.chinaAddConfirmSuspect
 
   @action loadTodayData() {
     return agent.Home.todayData()
@@ -71,7 +75,7 @@ export class HomeStore {
   }
 
   @action loadRecentData() {
-    agent.Home.recentData()
+    return agent.Home.recentData()
       .then(res => {
         if (res.ok || res.status === 2000 || res.statesText === "OK") {
           return JSON.parse(res.text)
@@ -107,6 +111,17 @@ export class HomeStore {
             this.globalStatis = globalStatis;
             this.globalDailyHistory = globalDailyHistory;
             this.cityStatis = cityStatis;
+
+            this.chinaAddConfirmSuspectOption = {
+              xAxis: {
+                data: this.chinaDayAddList.map(item => item.date)
+              },
+              series: [{
+                data: this.chinaDayAddList.map(item => item.confirm),
+              },{
+                data: this.chinaDayAddList.map(item => item.suspect),
+              }]
+            }
       }))
   }
 
