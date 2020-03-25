@@ -65,6 +65,7 @@ module.exports = {
   proxySetup: resolveApp('src/setupProxy.js'),
   appNodeModules: resolveApp('node_modules'),
   publicUrlOrPath,
+  antdModifyLess: resolveApp('src/style/antd-modify.less'),
 };
 
 
