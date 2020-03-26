@@ -3,21 +3,15 @@
  * @Date: 2020/3/24 7:28 PM
  * @Author: Youth
  */
-const chinaAddConfirmSuspect = {
+const commonChartsOption = {
   tooltip: {
     trigger: 'axis'
   },
-  legend: {
-    top: 20,
-    left: 0,
-    icon:'rect',
-    data: ['确诊', '疑似']
-  },
   grid: {
-    left: '3%',
-    right: '4%',
-    bottom: '3%',
-    top: 50,
+    left: '0',
+    right: '0%',
+    bottom: '0',
+    top: '5%',
     containLabel: true
   },
   xAxis: {
@@ -45,6 +39,14 @@ const chinaAddConfirmSuspect = {
       fontWeight: 400,
     }
   },
+}
+const chinaAddConfirmSuspect = {
+  _id: 'chinaAddConfirmSuspect',
+  ...commonChartsOption,
+  legend: {
+    data: ['确诊', '疑似'],
+    show:false,
+  },
   series: [{
     name: '确诊',
     data: [],
@@ -59,6 +61,83 @@ const chinaAddConfirmSuspect = {
     color:'#ffd661'
   }]
 };
+const chinaConfirmSuspectImported = {
+  _id: 'chinaConfirmSuspectImported',
+  ...commonChartsOption,
+  legend: {
+    data: ['累计确诊', '现有确诊', '现有疑似', '现有重症'],
+    show: false,
+  },
+  series: [{
+    name: '累计确诊',
+    data: [],
+    type: 'line',
+    smooth: true,
+    color: '#9b0a0e'
+  },{
+    name: '现有确诊',
+    data: [],
+    type: 'line',
+    smooth: true,
+    color: '#ff7b7c'
+  },{
+    name: '现有疑似',
+    data: [],
+    type: 'line',
+    smooth: true,
+    color: '#ffd661'
+  },{
+    name: '现有重症',
+    data: [],
+    type: 'line',
+    smooth: true,
+    color: '#cd73bf'
+  }]
+}
+
+const chinaHealDead = {
+  _id: 'chinaHealDead',
+  ...commonChartsOption,
+  legend: {
+    data: ['累计治愈', '累计死亡',],
+    show: false,
+  },
+  series: [{
+    name: '累计治愈',
+    data: [],
+    type: 'line',
+    smooth: true,
+    color: '#65b379'
+  },{
+    name: '累计死亡',
+    data: [],
+    type: 'line',
+    smooth: true,
+    color: '#87878b'
+  }]
+}
+
+const chinaHealDeadRate = {
+  _id: 'chinaHealDeadRate',
+  ...commonChartsOption,
+  legend: {
+    data: ['治愈率', '病死率',],
+    show: false,
+  },
+  series: [{
+    name: '治愈率',
+    data: [],
+    type: 'line',
+    smooth: true,
+    color: '#65b379'
+  },{
+    name: '病死率',
+    data: [],
+    type: 'line',
+    smooth: true,
+    color: '#87878b'
+  }]
+}
 
 const chinaMapOption = {
   width: '95%',
@@ -137,5 +216,8 @@ const chinaMapOption = {
 
 export {
   chinaMapOption,
-  chinaAddConfirmSuspect
+  chinaAddConfirmSuspect,
+  chinaConfirmSuspectImported,
+  chinaHealDead,
+  chinaHealDeadRate,
 }

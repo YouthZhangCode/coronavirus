@@ -9,7 +9,7 @@ import { inject, observer } from 'mobx-react'
 import '../../../node_modules/echarts/map/js/china'
 import { Carousel } from 'antd'
 
-import {EchartWrap} from '../../components'
+import {EchartWrap, CarouselWrap} from '../../components'
 import moduleScss from './Home.module.scss'
 import {RecentNum} from '../../components'
 import * as EchartsOptions from '../../common/EchartsOptions'
@@ -153,22 +153,14 @@ class Home extends Component {
             </div>
           </div>
 
-          <EchartWrap option={this.props.homeStore.chinaAddConfirmSuspectOption}/>
 
-          <Carousel className={moduleScss["ant-carousel"]}>
-            <div className={moduleScss["slick-slide"]}>
-              <h3>1</h3>
-            </div>
-            <div className={moduleScss["slick-slide"]}>
-              <h3>2</h3>
-            </div>
-            <div className={moduleScss["slick-slide"]}>
-              <h3>3</h3>
-            </div>
-            <div className={moduleScss["slick-slide"]}>
-              <h3>4</h3>
-            </div>
-          </Carousel>
+          <CarouselWrap dotNames={["全国疫情\n新增趋势", '全国确诊\n疑似/重症', '全国累计\n治愈/死亡', '治愈率\n病死率']}>
+            <EchartWrap title={'全国疫情新增趋势'} option={this.props.homeStore.chinaAddConfirmSuspectOption}/>
+            <EchartWrap title={'全国确诊/疑似/重症趋势'} option={this.props.homeStore.chinaConfirmSuspectImportedOption}/>
+            <EchartWrap title={'全国累计治愈/死亡趋势'} option={this.props.homeStore.chinaHealDeadOption}/>
+            <EchartWrap title={'全国治愈率病/死率趋势'} option={this.props.homeStore.chinaHealDeadRateOption}/>
+          </CarouselWrap>
+
           <div style={{height: '400px', backgroundColor: "red"}}>
 
           </div>

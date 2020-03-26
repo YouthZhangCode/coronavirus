@@ -5,13 +5,12 @@
  */
 import Header from './business/Header'
 import RecentNum from './business/RecentNum'
-import EchartWrap from './basic/EchartWrap'
+import EchartWrap from './business/EchartWrap'
+import CarouselWrap from './business/CarouselWrap'
 
 export {
-  // basic
   EchartWrap,
-
-  // business
   Header,
   RecentNum,
+  CarouselWrap,
 }

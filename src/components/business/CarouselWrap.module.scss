@@ -1,0 +1,52 @@
+@import "../../style/constant";
+
+.wrap {
+  position: relative;
+}
+.carouselWrap {
+  position: relative;
+  p{
+    position: absolute;
+    width: 9.6vw;
+    height: 9.6vw;
+    top: 50%;
+    transform: translateY(-50%);
+    background-size: 100% 100%;
+  }
+  .arr_l {
+    background-image: url(//mat1.gtimg.com/news/signin/v6/zhexian_left.png);
+  }
+  .arr_r {
+    right: 0;
+    background-image: url(//mat1.gtimg.com/news/signin/v6/zhelian_right.png);
+  }
+}
+.dotsWrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 3.2vw 2*$padding1 0;
+  span {
+    display: inline-block;
+    white-space: pre;
+    background-color: #f3f6f8;
+    flex: 1;
+    text-align: center;
+    margin-right: 10px;
+    font-size: 3.2vw;
+    line-height: 4.267vw;
+    padding: 1.333vw 0;
+    color: #222;
+    border: 1px solid #e9ebed;
+    border-radius: 1.067vw;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+  .selected {
+    color: #005def;
+    border-color: #8fb8ff;
+    background-color: #eef4ff;
+    font-weight: 500;
+  }
+}

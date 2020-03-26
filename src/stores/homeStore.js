@@ -34,6 +34,9 @@ export class HomeStore {
   @observable todayNotice = []
 
   @observable chinaAddConfirmSuspectOption = EchartsOptions.chinaAddConfirmSuspect
+  @observable chinaConfirmSuspectImportedOption = EchartsOptions.chinaConfirmSuspectImported
+  @observable chinaHealDeadOption = EchartsOptions.chinaHealDead;
+  @observable chinaHealDeadRateOption = EchartsOptions.chinaHealDeadRate;
 
   @action loadTodayData() {
     return agent.Home.todayData()
@@ -120,6 +123,40 @@ export class HomeStore {
                 data: this.chinaDayAddList.map(item => item.confirm),
               },{
                 data: this.chinaDayAddList.map(item => item.suspect),
+              }]
+            };
+            this.chinaConfirmSuspectImportedOption = {
+              xAxis: {
+                data: this.chinaDayList.map(item => item.date)
+              },
+              series: [{
+                data: this.chinaDayList.map(item => item.confirm)
+              },{
+                data: this.chinaDayList.map(item => item.nowConfirm)
+              },{
+                data: this.chinaDayList.map(item => item.suspect)
+              },{
+                data: this.chinaDayList.map(item => item.nowSevere)
+              }]
+            };
+            this.chinaHealDeadOption = {
+              xAxis: {
+                data: this.chinaDayList.map(item => item.date)
+              },
+              series: [{
+                data: this.chinaDayList.map(item => item.heal)
+              },{
+                data: this.chinaDayList.map(item => item.dead)
+              }]
+            };
+            this.chinaHealDeadRateOption = {
+              xAxis: {
+                data: this.chinaDayList.map(item => item.date)
+              },
+              series: [{
+                data: this.chinaDayList.map(item => item.healRate)
+              },{
+                data: this.chinaDayList.map(item => item.deadRate)
               }]
             }
       }))
