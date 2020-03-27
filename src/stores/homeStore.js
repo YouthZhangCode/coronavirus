@@ -37,6 +37,8 @@ export class HomeStore {
   @observable chinaConfirmSuspectImportedOption = EchartsOptions.chinaConfirmSuspectImported
   @observable chinaHealDeadOption = EchartsOptions.chinaHealDead;
   @observable chinaHealDeadRateOption = EchartsOptions.chinaHealDeadRate;
+  @observable importedAddOption = EchartsOptions.importedAdd;
+  @observable importedTotalOption = EchartsOptions.importedTotal;
 
   @action loadTodayData() {
     return agent.Home.todayData()
@@ -158,6 +160,25 @@ export class HomeStore {
               },{
                 data: this.chinaDayList.map(item => item.deadRate)
               }]
+            };
+
+            let importedAddList = this.chinaDayAddList.filter(item => item.importedCase > 0);
+            this.importedAddOption = {
+              xAxis: {
+                data: importedAddList.map(item => item.date)
+              },
+              series: {
+                data: importedAddList.map(item => item.importedCase)
+              }
+            };
+            let importedList = this.chinaDayList.filter(item => item.importedCase > 0);
+            this.importedTotalOption = {
+              xAxis: {
+                data: importedList.map(item => item.date)
+              },
+              series: {
+                data: importedList.map(item => item.importedCase)
+              }
             }
       }))
   }

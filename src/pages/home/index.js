@@ -9,18 +9,19 @@ import { inject, observer } from 'mobx-react'
 import '../../../node_modules/echarts/map/js/china'
 import { Carousel } from 'antd'
 
-import {EchartWrap, CarouselWrap} from '../../components'
+import {EchartWrap, CarouselWrap, MyTableHeader, MyTable} from '../../components'
 import moduleScss from './Home.module.scss'
 import {RecentNum} from '../../components'
 import * as EchartsOptions from '../../common/EchartsOptions'
 
 export default
-@inject('homeStore')
+@inject('homeStore', 'foreignStore')
 @observer
 class Home extends Component {
 
   constructor(props) {
     super(props)
+    console.log(props)
     this.state = {
       chinaMapBtnSelectedIndex: 0,
     }
@@ -30,6 +31,7 @@ class Home extends Component {
 
     this.props.homeStore.loadRecentData()
     this.props.homeStore.loadTodayNotice()
+    this.props.foreignStore.loadForeignData()
     this.props.homeStore.loadTodayData()
       .then(res => {
         this.chinaMap.setOption({
@@ -85,6 +87,32 @@ class Home extends Component {
   }
 
   _renderTabChina() {
+    let areaTree = this.props.homeStore.areaTree[0];
+    let provinceData = !areaTree ? [] :
+    areaTree.children.map(item =>{
+      let headerContents = [
+        {content: item.name},
+        {content: item.total.nowConfirm},
+        {content: item.total.confirm},
+        {content: item.total.heal},
+        {content: item.total.dead},
+        {content: '详情'},
+        ]
+      let childrenContents = item.children.map(item1 => {
+        return [
+          {content: item1.name},
+          {content: item1.total.nowConfirm},
+          {content: item1.total.confirm},
+          {content: item1.total.heal},
+          {content: item1.total.dead},
+          {content: ''},
+        ]
+      })
+      return {
+        headerContents,
+        childrenContents
+      }
+    })
     return (
       <div className={'tabChina'}>
         <div className={'topDataWrap'}>
@@ -144,15 +172,22 @@ class Home extends Component {
             </a>
           </div>
 
+          {/* 中国疫情地图 */}
           <div className={moduleScss.chinaMapWrap}>
             <div id={'chinaMap'} className={moduleScss.chinaMap}>
             </div>
             <div className={moduleScss.chinaMapBtns}>
-              <span onClick={()=>{this.chinaMapBtnClicked(0)}} className={`${this.state.chinaMapBtnSelectedIndex === 0 && moduleScss.chinaMapBtnSelected}`}>现有确诊</span>
-              <span onClick={()=>{this.chinaMapBtnClicked(1)}} className={`${this.state.chinaMapBtnSelectedIndex === 1 && moduleScss.chinaMapBtnSelected}`}>累计确诊</span>
+              <span onClick={()=>{this.chinaMapBtnClicked(0)}} className={this.state.chinaMapBtnSelectedIndex === 0 ? moduleScss.chinaMapBtnSelected : undefined}>现有确诊</span>
+              <span onClick={()=>{this.chinaMapBtnClicked(1)}} className={this.state.chinaMapBtnSelectedIndex === 1 ? moduleScss.chinaMapBtnSelected : undefined}>累计确诊</span>
             </div>
           </div>
 
+          {/* 国内疫情趋势 echarts */}
+          <CarouselWrap dotNames={['境外输入\n省市TOP10','境外输入\n新增趋势','境外输入\n累计趋势']}>
+            <EchartWrap title={'境外输入省市TOP10'} option={this.props.foreignStore.importedTop10Option}/>
+            <EchartWrap title={'境外输入新增趋势'} option={this.props.homeStore.importedAddOption}/>
+            <EchartWrap title={'境外输入累计趋势'} option={this.props.homeStore.importedTotalOption}/>
+          </CarouselWrap>
 
           <CarouselWrap dotNames={["全国疫情\n新增趋势", '全国确诊\n疑似/重症', '全国累计\n治愈/死亡', '治愈率\n病死率']}>
             <EchartWrap title={'全国疫情新增趋势'} option={this.props.homeStore.chinaAddConfirmSuspectOption}/>
@@ -160,6 +195,24 @@ class Home extends Component {
             <EchartWrap title={'全国累计治愈/死亡趋势'} option={this.props.homeStore.chinaHealDeadOption}/>
             <EchartWrap title={'全国治愈率病/死率趋势'} option={this.props.homeStore.chinaHealDeadRateOption}/>
           </CarouselWrap>
+
+          {/* 国内疫情列表 */}
+          <div className={moduleScss.chinaListWrap}>
+            <MyTableHeader
+              titles={[
+                {content:'地区', },
+                {content:'现有确诊', style:{color:'#ff5d00', background:'#fcf2e8'}},
+                {content:'累计确诊', style:{color:'#ff5253', background:'#fdeeee'}},
+                {content:'治愈', style:{color:'#178b50', background:'#e7fce7'}},
+                {content:'死亡', style:{color:'#4e5a65', background:'#f3f6f8'}},
+                {content:'疫情', }]}
+            />
+            {
+              provinceData.map((item, index) =>
+                <MyTable key={index} headerContents={item.headerContents} childrenContents={item.childrenContents}/>
+              )
+            }
+          </div>
 
           <div style={{height: '400px', backgroundColor: "red"}}>
 

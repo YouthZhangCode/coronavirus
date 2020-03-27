@@ -41,10 +41,10 @@ export default class EchartWrap extends Component {
           <div style={styles.title}>{this.props.title}</div>
           <div style={styles.legendWrap}>
             {
-              this.props.showLegend &&
+              this.props.showLegend && Array.isArray(this.series) &&
               this.series.map(
-                item =>
-                  <div style={styles.legendWrap}>
+                (item, index) =>
+                  <div key={index} style={styles.legendWrap}>
                     <div style={{...styles.legendRect, backgroundColor:item.color}}>
                     </div>
                     <span style={styles.legend}>{item._name || item.name}</span>

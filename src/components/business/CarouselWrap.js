@@ -26,7 +26,7 @@ export default class CarouselWrap extends Component{
 
   carouselGoTo(index) {
     if (index !== this.state.selectedIndex) {
-      this.carousel.goTo(index)
+      this.carousel.current.goTo(index)
       this.setState({
         selectedIndex: index
       })
@@ -46,7 +46,7 @@ export default class CarouselWrap extends Component{
                 })
               }
             }}
-            ref={el => this.carousel = el}
+            ref={this.carousel}
             dots={false}>
             {this.props.children}
           </Carousel>
@@ -62,7 +62,7 @@ export default class CarouselWrap extends Component{
           }
         </div>
         <div className={moduleScss.dotsWrap}>
-          {this.props.dotNames.map((item, index)=><span onClick={this.carouselGoTo.bind(this, index)} className={index === this.state.selectedIndex && moduleScss.selected}>{item}</span>)}
+          {this.props.dotNames.map((item, index)=><span key={index} onClick={this.carouselGoTo.bind(this, index)} className={index === this.state.selectedIndex ? moduleScss.selected : undefined}>{item}</span>)}
         </div>
       </div>
     )

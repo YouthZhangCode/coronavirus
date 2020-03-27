@@ -3,6 +3,8 @@
  * @Date: 2020/3/24 7:28 PM
  * @Author: Youth
  */
+import echarts from 'echarts';
+
 const commonChartsOption = {
   tooltip: {
     trigger: 'axis'
@@ -139,6 +141,47 @@ const chinaHealDeadRate = {
   }]
 }
 
+const importedTop10 = {
+  _id: 'importedTop10',
+  ...commonChartsOption,
+  series: {
+    type: 'bar',
+    barWidth: '10px',
+    itemStyle: {
+      normal: {
+        color: function (params) {
+          var colorList = ['#ff2736', '#ff2736', '#ff2736','#ff2736','#ffa577','#ffa577','#ffa577','#ffcea0','#ffcea0','#ffcea0',]
+          return colorList[params.dataIndex]
+        }
+      }
+    }
+  }
+}
+
+const importedAdd = {
+  _id: 'importedAdd',
+  ...commonChartsOption,
+  series: {
+    name: '境外输入新增',
+    data: [],
+    type: 'line',
+    smooth: true,
+    color: '#ff6341',
+  }
+}
+
+const importedTotal = {
+  _id: 'importedTotal',
+  ...commonChartsOption,
+  series: {
+    name: '境外输入累计',
+    data: [],
+    type: 'line',
+    smooth: true,
+    color: '#de1f05',
+  }
+}
+
 const chinaMapOption = {
   width: '95%',
   // 提示框组件
@@ -220,4 +263,7 @@ export {
   chinaConfirmSuspectImported,
   chinaHealDead,
   chinaHealDeadRate,
+  importedTop10,
+  importedAdd,
+  importedTotal,
 }

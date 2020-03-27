@@ -57,6 +57,12 @@ const Home = {
     request.get('', '/g2/getOnsInfo?name=wuwei_ww_ww_today_notice')
 }
 
+const Foreign = {
+  foreignData: () =>
+    request.get('', '/g2/getOnsInfo?name=disease_foreign'),
+}
+
 export default {
-  Home
+  Home,
+  Foreign
 }

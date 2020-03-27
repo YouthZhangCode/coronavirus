@@ -6,9 +6,11 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import homeStore from './stores/homeStore';
+import foreignStore from './stores/foreignStore';
 
 const stores = {
   homeStore,
+  foreignStore,
 }
 
 window.____APP_STATE____ = stores
