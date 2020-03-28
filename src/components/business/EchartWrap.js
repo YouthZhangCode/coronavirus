@@ -24,7 +24,7 @@ export default class EchartWrap extends Component {
     this.series = props.option.series
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     console.log('componentWillReceiveProps')
     this.chart.setOption(nextProps.option)
   }

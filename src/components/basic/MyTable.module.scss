@@ -1,15 +1,66 @@
 table {
   width: 100%;
+}
+
+.blockTh {
+  background-color: #f5f5f5;
+  border-right: 1px solid #ffffff;
+  text-align: center;
+  height: 10.667vw;
+  font-size: 3.2vw;
+  font-weight: 400;
+  color: #222;
+  &:last-child {
+    border-right: 0;
+  }
+}
+
+.mainTableBody {
+  font-size: 3.773vw;
+  font-weight: 600;
+  color: #222;
+  text-align: center;
+  line-height: 10.667vw;
+  border-bottom: 1px solid #f5f5f5;
   th {
-    background-color: #f5f5f5;
-    border-right: 1px solid #ffffff;
-    text-align: center;
-    height: 10.667vw;
-    font-size: 3.2vw;
-    font-weight: 400;
-    color: #222;
-    &:last-child {
-      border-right: 0;
+    text-align: left;
+    .content {
+      position: relative;
+      margin-left: 3vw;
+      &:before {
+        width: 2.133vw;
+        height: 1.6vw;
+        left: -3vw;
+        position: absolute;
+        content: '.';
+        line-height: 0;
+        font-size: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        background: url(http://mat1.gtimg.com/news/images/inews/2020/feiyan/18/img/area_down.png);
+        background-size: 100% 100%;
+      }
     }
+    .showChildren {
+      &:before {
+        background: url(http://mat1.gtimg.com/news/images/inews/2020/feiyan/18/img/area_top.png);
+        background-size: 100% 100%;
+      }
+    }
+
+  }
+}
+
+.subTableBody {
+  font-size: 3.2vw;
+  color: #737373;
+  font-weight: 400;
+  text-align: center;
+  line-height: 10.667vw;
+  border-bottom: 1px solid #f5f5f5;
+  th {
+    font-weight: 400;
+    text-align: left;
+    padding-left: 3vw;
   }
 }

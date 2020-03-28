@@ -7,7 +7,6 @@ import React, {Component} from 'react'
 import echarts from 'echarts'
 import { inject, observer } from 'mobx-react'
 import '../../../node_modules/echarts/map/js/china'
-import { Carousel } from 'antd'
 
 import {EchartWrap, CarouselWrap, MyTableHeader, MyTable} from '../../components'
 import moduleScss from './Home.module.scss'
@@ -21,13 +20,31 @@ class Home extends Component {
 
   constructor(props) {
     super(props)
-    console.log(props)
     this.state = {
       chinaMapBtnSelectedIndex: 0,
+      isTableHeaderFixed: false,
     }
   }
 
+  componentDidUpdate() {
+    this.tableHeaderOffsetTop = document.getElementById('tableHeaderWrap').offsetTop - 0.11733*(window.innerWidth)
+  }
+
   componentDidMount() {
+
+    window.onscroll = ()=> {
+      let domScrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+      console.log(domScrollTop , this.tableHeaderOffsetTop)
+      if (domScrollTop > this.tableHeaderOffsetTop && !this.state.isTableHeaderFixed) {
+        this.setState({
+          isTableHeaderFixed: true
+        })
+      } else if (domScrollTop < this.tableHeaderOffsetTop && this.state.isTableHeaderFixed) {
+        this.setState({
+          isTableHeaderFixed: false
+        })
+      }
+    }
 
     this.props.homeStore.loadRecentData()
     this.props.homeStore.loadTodayNotice()
@@ -87,32 +104,6 @@ class Home extends Component {
   }
 
   _renderTabChina() {
-    let areaTree = this.props.homeStore.areaTree[0];
-    let provinceData = !areaTree ? [] :
-    areaTree.children.map(item =>{
-      let headerContents = [
-        {content: item.name},
-        {content: item.total.nowConfirm},
-        {content: item.total.confirm},
-        {content: item.total.heal},
-        {content: item.total.dead},
-        {content: '详情'},
-        ]
-      let childrenContents = item.children.map(item1 => {
-        return [
-          {content: item1.name},
-          {content: item1.total.nowConfirm},
-          {content: item1.total.confirm},
-          {content: item1.total.heal},
-          {content: item1.total.dead},
-          {content: ''},
-        ]
-      })
-      return {
-        headerContents,
-        childrenContents
-      }
-    })
     return (
       <div className={'tabChina'}>
         <div className={'topDataWrap'}>
@@ -121,7 +112,7 @@ class Home extends Component {
           <div className={moduleScss.marqueeWarp}>
             <div className={moduleScss.marquee}>
               <div className={moduleScss.marqueeTab}>
-                <a>{this.props.homeStore.todayNotice.length > 0 && this.props.homeStore.todayNotice[0]['showNotice']}</a>
+                <a href='#'>{this.props.homeStore.todayNotice.length > 0 && this.props.homeStore.todayNotice[0]['showNotice']}</a>
               </div>
             </div>
           </div>
@@ -161,13 +152,13 @@ class Home extends Component {
 
           {/* 链接 */}
           <div className={moduleScss.enterWrap}>
-            <a className={moduleScss.first}>
+            <a href='#' className={moduleScss.first}>
               <span className={moduleScss.firstIcon}>今日关注</span>
             </a>
-            <a className={moduleScss.mid}>
+            <a href='#' className={moduleScss.mid}>
               <span className={moduleScss.midIcon}>出入境查询</span>
             </a>
-            <a>
+            <a href='#'>
               <span className={moduleScss.lastIcon}>口罩售卖</span>
             </a>
           </div>
@@ -198,17 +189,30 @@ class Home extends Component {
 
           {/* 国内疫情列表 */}
           <div className={moduleScss.chinaListWrap}>
-            <MyTableHeader
-              titles={[
-                {content:'地区', },
-                {content:'现有确诊', style:{color:'#ff5d00', background:'#fcf2e8'}},
-                {content:'累计确诊', style:{color:'#ff5253', background:'#fdeeee'}},
-                {content:'治愈', style:{color:'#178b50', background:'#e7fce7'}},
-                {content:'死亡', style:{color:'#4e5a65', background:'#f3f6f8'}},
-                {content:'疫情', }]}
-            />
+            <div className={`${moduleScss.fixedTableHeader} ${this.state.isTableHeaderFixed ? undefined : moduleScss.hiddenHeader}`}>
+              <MyTableHeader
+                titles={[
+                  {content:'地区', },
+                  {content:'现有确诊', style:{color:'#ff5d00', background:'#fcf2e8'}},
+                  {content:'累计确诊', style:{color:'#ff5253', background:'#fdeeee'}},
+                  {content:'治愈', style:{color:'#178b50', background:'#e7fce7'}},
+                  {content:'死亡', style:{color:'#4e5a65', background:'#f3f6f8'}},
+                  {content:'疫情', }]}
+              />
+            </div>
+            <div id='tableHeaderWrap'>
+              <MyTableHeader
+                titles={[
+                  {content:'地区', },
+                  {content:'现有确诊', style:{color:'#ff5d00', background:'#fcf2e8'}},
+                  {content:'累计确诊', style:{color:'#ff5253', background:'#fdeeee'}},
+                  {content:'治愈', style:{color:'#178b50', background:'#e7fce7'}},
+                  {content:'死亡', style:{color:'#4e5a65', background:'#f3f6f8'}},
+                  {content:'疫情', }]}
+              />
+            </div>
             {
-              provinceData.map((item, index) =>
+              this.props.homeStore.chinaTree.map((item, index) =>
                 <MyTable key={index} headerContents={item.headerContents} childrenContents={item.childrenContents}/>
               )
             }

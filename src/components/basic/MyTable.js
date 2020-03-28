@@ -20,7 +20,7 @@ export class MyTableHeader extends Component {
         <thead>
           <tr>
             {this.props.titles.map((item, index) =>
-              <th key={index} style={item.style}>{item.content}</th>
+              <th className={moduleScss.blockTh} key={index} style={{...item.style}}>{item.content}</th>
             )}
           </tr>
         </thead>
@@ -39,46 +39,55 @@ export class MyTable extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      showChildren: true
+      showChildren: false
     }
+  }
+
+  itemClicked(){
+    this.setState({
+      showChildren: !this.state.showChildren
+    })
   }
 
   render() {
     return (
       <table>
-        <tbody style={{width: '100vw'}}>
-        <tr style={{width: '100%', background: 'red'}}>
-          {this.props.headerContents.map((item, index) => {
-            if (index === 0) {
-              return (
-                <th key={index} style={item.style} onClick={item.onClick}>{item.content}</th>
-              )
-            } else {
-              return (
-                <td key={index} style={item.style} onClick={item.onClick}>{item.content}</td>
-              )
-            }
-          })}
-        </tr>
-        {this.state.showChildren && this.props.childrenContents.map((item, index0) => {
-          return(
-            <tr key={index0} style={{width: '100%'}}>
-              {
-                item.map((item1, index) => {
-                  if (index === 0) {
-                    return (
-                      <th key={index} style={item1.style} onClick={item1.onClick}>{item1.content}</th>
-                    )
-                  } else {
-                    return (
-                      <td key={index} style={item1.style} onClick={item1.onClick}>{item1.content}</td>
-                    )
-                  }
-                })
+        <tbody>
+          <tr
+            className={moduleScss.mainTableBody}>
+            {this.props.headerContents.map((item, index) => {
+              if (index === 0) {
+                return (
+                  <th key={index} style={{...item.style}} onClick={item.onClick || this.itemClicked.bind(this)}>
+                    <p className={`${moduleScss.content} ${this.state.showChildren && moduleScss.showChildren}`}>{item.content}</p>
+                  </th>
+                )
+              } else {
+                return (
+                  <td key={index} style={{...item.style}} onClick={item.onClick || this.itemClicked.bind(this)}>{item.content}</td>
+                )
               }
-            </tr>
-          )
-        })}
+            })}
+          </tr>
+          {this.state.showChildren && this.props.childrenContents.map((item, index0) => {
+            return(
+              <tr key={index0} className={moduleScss.subTableBody}>
+                {
+                  item.map((item1, index) => {
+                    if (index === 0) {
+                      return (
+                        <th key={index} style={{...item1.style}} onClick={item1.onClick}>{item1.content}</th>
+                      )
+                    } else {
+                      return (
+                        <td key={index} style={{...item1.style}} onClick={item1.onClick}>{item1.content}</td>
+                      )
+                    }
+                  })
+                }
+              </tr>
+            )
+          })}
         </tbody>
       </table>
     )

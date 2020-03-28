@@ -9,12 +9,12 @@ import _superagent from 'superagent'
 
 const superagent = superagentPromise(_superagent, global.Promise)
 
-const API_ROOT_API_INEWS_QQ = "https://api.inews.qq.com"
-const API_ROOT_VIEW_INEWS_QQ = "https://view.inews.qq.com"
-const API_ROOT_API_DREAMREADER_QQ = "https://api.dreamreader.qq.com"
-const API_ROOT_API_YC_STATIC_QQ = "https://yc.static.qq.com"
-const API_ROOT_API_VP_FACT_QQ = "https://vp.fact.qq.com"
-const API_ROOT_API_WECHAT_WECITY_QQ = "https://wechat.wecity.qq.com"
+// const API_ROOT_API_INEWS_QQ = "https://api.inews.qq.com"
+// const API_ROOT_VIEW_INEWS_QQ = "https://view.inews.qq.com"
+// const API_ROOT_API_DREAMREADER_QQ = "https://api.dreamreader.qq.com"
+// const API_ROOT_API_YC_STATIC_QQ = "https://yc.static.qq.com"
+// const API_ROOT_API_VP_FACT_QQ = "https://vp.fact.qq.com"
+// const API_ROOT_API_WECHAT_WECITY_QQ = "https://wechat.wecity.qq.com"
 
 const handleErrors = err => {
   // if err ...

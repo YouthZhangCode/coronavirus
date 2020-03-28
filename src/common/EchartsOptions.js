@@ -3,8 +3,6 @@
  * @Date: 2020/3/24 7:28 PM
  * @Author: Youth
  */
-import echarts from 'echarts';
-
 const commonChartsOption = {
   tooltip: {
     trigger: 'axis'

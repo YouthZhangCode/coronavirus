@@ -18,6 +18,7 @@ export class HomeStore {
   @observable areaTree = []
   @observable chinaMapNowData = []
   @observable chinaMapTotalData = []
+  @observable chinaTree = []
 
   @observable chinaDayList = []
   @observable chinaDayAddList = []
@@ -72,6 +73,33 @@ export class HomeStore {
               this.chinaMapTotalData = areaTree[0] && areaTree[0].children.map(item => {
                 return {...item, value: item.total.confirm}
               })
+
+              this.chinaTree = this.areaTree[0] &&
+                this.areaTree[0].children.map(item =>{
+                  let headerContents = [
+                    {content: item.name},
+                    {content: item.total.nowConfirm},
+                    {content: item.total.confirm},
+                    {content: item.total.heal},
+                    {content: item.total.dead},
+                    {content: '详情', style:{color:'#005def', fontWeight:400}, onClick:this.chinaTreeDetailClicked.bind(this, item.name)},
+                  ]
+                  let childrenContents = item.children.map(item1 => {
+                    return [
+                      {content: item1.name},
+                      {content: item1.total.nowConfirm},
+                      {content: item1.total.confirm},
+                      {content: item1.total.heal},
+                      {content: item1.total.dead},
+                      {content: ''},
+                    ]
+                  })
+                  return {
+                    headerContents,
+                    childrenContents
+                  }
+                })
+
               return data
             }))
             .catch(e => {
@@ -188,7 +216,6 @@ export class HomeStore {
       .then(res => {
         let resObj = JSON.parse(res.text)
         if (resObj.ret === 0) {
-          console.log('today notice ----- \n', JSON.parse(resObj.data))
           return JSON.parse(resObj.data)
         } else {
           // throw
@@ -197,6 +224,10 @@ export class HomeStore {
       .then(action(data => {
         this.todayNotice = data
       }))
+  }
+
+  chinaTreeDetailClicked(area) {
+    console.log(area, 'item clicked')
   }
 }
 

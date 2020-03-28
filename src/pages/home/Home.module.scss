@@ -263,3 +263,14 @@
 .chinaListWrap {
   margin: 4vw 2*$padding1 0;
 }
+.fixedTableHeader {
+  position: fixed;
+  top: 11.733vw;
+  width: 100vw;
+  left: 0;
+  z-index: 8;
+
+}
+.hiddenHeader {
+  display: none;
+}
