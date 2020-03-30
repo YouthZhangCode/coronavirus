@@ -219,7 +219,7 @@ class Home extends Component {
             }
           </div>
 
-          <div style={{height: '400px', backgroundColor: "red"}}>
+          <div style={{height: '400px', backgroundColor: "#f5f5f5"}}>
 
           </div>
 

@@ -4,9 +4,11 @@
  * @Author: Youth
  */
 import React, {Component} from 'react'
+import {withRouter} from 'react-router'
+
 import moduleScss from './Header.module.scss'
 
-export default class Header extends Component{
+class Header extends Component{
 
   constructor(props) {
     super(props)
@@ -23,7 +25,7 @@ export default class Header extends Component{
             <div className={moduleScss.hidden}>
               <div ref='aaa' className={`${moduleScss.navBar} ${moduleScss.view}`}>
                 <div onClick={()=>{this.itemSelected(0)}} className={`${moduleScss.navItem} ${moduleScss.itemHome} ${this.state.selected === 0 && moduleScss.active}`}>国内疫情</div>
-                <div onClick={()=>{this.itemSelected(1)}} className={`${moduleScss.navItem} ${moduleScss.itemOversea} ${this.state.selected === 1 && moduleScss.active}`}>海外疫情</div>
+                <div onClick={()=>{this.itemSelected(1)}} className={`${moduleScss.navItem} ${moduleScss.itemForeign} ${this.state.selected === 1 && moduleScss.active}`}>海外疫情</div>
                 <div onClick={()=>{this.itemSelected(2)}} className={`${moduleScss.navItem} ${moduleScss.itemHubei} ${this.state.selected === 2 && moduleScss.active}`}>湖北疫情</div>
                 <div onClick={()=>{this.itemSelected(3)}} className={`${moduleScss.navItem} ${this.state.selected === 3 && moduleScss.active}`}>最新进展</div>
                 <div onClick={()=>{this.itemSelected(4)}} className={`${moduleScss.navItem} ${this.state.selected === 4 && moduleScss.active}`}>定点医院</div>
@@ -44,6 +46,11 @@ export default class Header extends Component{
     this.setState({
       selected: index
     })
+    if (index === 0) {
+      this.props.history.push('/')
+    } else if (index === 1) {
+      this.props.history.push('./foreign')
+    }
   }
 
   scrollTo() {
@@ -53,3 +60,5 @@ export default class Header extends Component{
     // this.refs.aaa.style.transform = 'translateX(-50%)'
   }
 }
+
+export default withRouter(Header)

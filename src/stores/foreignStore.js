@@ -29,11 +29,22 @@ export class ForeignStore  {
           importStatis
         })=>{
           this.importedTop10Option = {
+            ...EchartsOptions.importedTop10,
             xAxis: {
               data: importStatis.TopList.map(item => item.province)
             },
             series: {
-              data: importStatis.TopList.map(item => item.importedCase)
+              data: importStatis.TopList.map(item => item.importedCase),
+              type: 'bar',
+              barWidth: '10px',
+              itemStyle: {
+                normal: {
+                  color: function (params) {
+                    var colorList = ['#ff2736', '#ff2736', '#ff2736','#ff2736','#ffa577','#ffa577','#ffa577','#ffcea0','#ffcea0','#ffcea0',]
+                    return colorList[params.dataIndex]
+                  }
+                }
+              }
             }
           }
       }))

@@ -4,7 +4,9 @@
  * @Author: Youth
  */
 import Home from './home'
+import Foreign from './foreign'
 
 export {
-  Home
+  Home,
+  Foreign,
 }

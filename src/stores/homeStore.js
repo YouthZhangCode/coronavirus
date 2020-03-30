@@ -54,7 +54,6 @@ export class HomeStore {
             .then(res => {
               let resObj = JSON.parse(res.text)
               if (resObj.ret === 0) {
-                console.log('today data ----- \n', JSON.parse(resObj.data))
                 return JSON.parse(resObj.data)
               } else {
                 // throw
@@ -154,66 +153,120 @@ export class HomeStore {
             this.cityStatis = cityStatis;
 
             this.chinaAddConfirmSuspectOption = {
+              ...EchartsOptions.chinaAddConfirmSuspect,
               xAxis: {
                 data: this.chinaDayAddList.map(item => item.date)
               },
               series: [{
+                name: '确诊',
+                type: 'line',
+                smooth: true,
+                color:'#f06061',
                 data: this.chinaDayAddList.map(item => item.confirm),
               },{
+                name: '疑似',
+                type: 'line',
+                smooth: true,
+                color:'#ffd661',
                 data: this.chinaDayAddList.map(item => item.suspect),
               }]
             };
             this.chinaConfirmSuspectImportedOption = {
+              ...EchartsOptions.chinaConfirmSuspectImported,
               xAxis: {
                 data: this.chinaDayList.map(item => item.date)
               },
               series: [{
-                data: this.chinaDayList.map(item => item.confirm)
+                data: this.chinaDayList.map(item => item.confirm),
+                name: '累计确诊',
+                type: 'line',
+                smooth: true,
+                color: '#9b0a0e'
               },{
-                data: this.chinaDayList.map(item => item.nowConfirm)
+                data: this.chinaDayList.map(item => item.nowConfirm),
+                name: '现有确诊',
+                type: 'line',
+                smooth: true,
+                color: '#ff7b7c'
               },{
-                data: this.chinaDayList.map(item => item.suspect)
+                data: this.chinaDayList.map(item => item.suspect),
+                name: '现有疑似',
+                type: 'line',
+                smooth: true,
+                color: '#ffd661'
               },{
-                data: this.chinaDayList.map(item => item.nowSevere)
+                data: this.chinaDayList.map(item => item.nowSevere),
+                name: '现有重症',
+                type: 'line',
+                smooth: true,
+                color: '#cd73bf'
               }]
             };
             this.chinaHealDeadOption = {
+              ...EchartsOptions.chinaHealDeadRate,
               xAxis: {
                 data: this.chinaDayList.map(item => item.date)
               },
               series: [{
-                data: this.chinaDayList.map(item => item.heal)
+                data: this.chinaDayList.map(item => item.heal),
+                name: '治愈率',
+                type: 'line',
+                smooth: true,
+                color: '#65b379'
               },{
-                data: this.chinaDayList.map(item => item.dead)
+                data: this.chinaDayList.map(item => item.dead),
+                name: '病死率',
+                type: 'line',
+                smooth: true,
+                color: '#87878b'
               }]
             };
             this.chinaHealDeadRateOption = {
+              ...EchartsOptions.chinaHealDeadRate,
               xAxis: {
                 data: this.chinaDayList.map(item => item.date)
               },
               series: [{
-                data: this.chinaDayList.map(item => item.healRate)
+                data: this.chinaDayList.map(item => item.healRate),
+                name: '治愈率',
+                type: 'line',
+                smooth: true,
+                color: '#65b379'
               },{
-                data: this.chinaDayList.map(item => item.deadRate)
+                data: this.chinaDayList.map(item => item.deadRate),
+                name: '病死率',
+                type: 'line',
+                smooth: true,
+                color: '#87878b'
               }]
             };
 
             let importedAddList = this.chinaDayAddList.filter(item => item.importedCase > 0);
             this.importedAddOption = {
+              ...EchartsOptions.importedAdd,
               xAxis: {
                 data: importedAddList.map(item => item.date)
               },
               series: {
-                data: importedAddList.map(item => item.importedCase)
+                data: importedAddList.map(item => item.importedCase),
+                name: '境外输入新增',
+                type: 'line',
+                smooth: true,
+                color: '#ff6341',
               }
             };
             let importedList = this.chinaDayList.filter(item => item.importedCase > 0);
             this.importedTotalOption = {
+              ...EchartsOptions.importedTotal,
               xAxis: {
                 data: importedList.map(item => item.date)
               },
               series: {
-                data: importedList.map(item => item.importedCase)
+                data: importedList.map(item => item.importedCase),
+                name: '境外输入累计',
+                type: 'line',
+                smooth: true,
+                color: '#de1f05',
               }
             }
       }))

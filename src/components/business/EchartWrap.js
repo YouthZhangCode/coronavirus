@@ -21,7 +21,6 @@ export default class EchartWrap extends Component {
 
   constructor(props) {
     super(props)
-    this.series = props.option.series
   }
 
   UNSAFE_componentWillReceiveProps(nextProps) {
@@ -41,8 +40,8 @@ export default class EchartWrap extends Component {
           <div style={styles.title}>{this.props.title}</div>
           <div style={styles.legendWrap}>
             {
-              this.props.showLegend && Array.isArray(this.series) &&
-              this.series.map(
+              this.props.showLegend && Array.isArray(this.props.option.series) &&
+              this.props.option.series.map(
                 (item, index) =>
                   <div key={index} style={styles.legendWrap}>
                     <div style={{...styles.legendRect, backgroundColor:item.color}}>
