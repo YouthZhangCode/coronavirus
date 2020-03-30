@@ -12,6 +12,8 @@ export class ForeignStore  {
 
   @observable importedTop10Option = EchartsOptions.importedTop10;
 
+  @observable globalStatis = {}
+
   @action loadForeignData() {
     agent.Foreign.foreignData()
       .then(res => {
@@ -21,13 +23,16 @@ export class ForeignStore  {
       })
       .then(json => {
         if (json.ret === 0) {
+          console.log(JSON.parse(json.data))
           return JSON.parse(json.data)
         }
       })
       .then(
         action(({
-          importStatis
+          importStatis,
+          globalStatis,
         })=>{
+          this.globalStatis = globalStatis;
           this.importedTop10Option = {
             ...EchartsOptions.importedTop10,
             xAxis: {

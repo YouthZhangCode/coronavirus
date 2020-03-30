@@ -104,8 +104,14 @@ class Home extends Component {
 
   _renderTabChina() {
     return (
-      <div className={'tabChina'}>
-        <div className={'topDataWrap'}>
+      <div>
+        <div>
+
+          {/*PageTab*/}
+          <div className={`${moduleScss.pageTab} ${moduleScss.leftSelected}`}>
+            <p className={moduleScss.pageTabCurrent}>国内疫情</p>
+            <p>海外疫情</p>
+          </div>
 
           {/*天幕*/}
           <div className={moduleScss.marqueeWarp}>

@@ -97,9 +97,53 @@
     text-align: center;
   }
 }
+
 @mixin show {
   display: block;
 }
+.pageTab {
+  height: 11.2vw;
+  border-radius: 3.2vw 3.2vw 0 0;
+  background: #ddecff;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  &:before {
+    position: absolute;
+    content: '.';
+    font-size: 0;
+    left: 50%;
+    transform:translateX(-50%);
+    top: 0;
+    height: 100%;
+    width: 10.667vw;
+    background-size: 100%;
+  }
+  p {
+    font-size: 4.267vw;
+    color: #445063;
+    width: 50%;
+    height: 100%;
+    text-align: center;
+    line-height: 11.2vw;
+  }
+  .pageTabCurrent {
+    background: #ffffff;
+    color: #005dff;
+  }
+}
+.leftSelected{
+  &:before {
+    background-image: url(https://mat1.gtimg.com/news/feiyanarea/tab_current_l.png);
+  }
+}
+.rightSelected{
+  &:before {
+    background-image: url(https://mat1.gtimg.com/news/feiyanarea/tab_current_r.png);
+  }
+}
+
+
 .marqueeWarp {
   background-color: #ffffff;
   padding-top: 1px;
@@ -219,6 +263,24 @@
     &:before {
       @include enterLeftLayout;
       background-image: url(https://mat1.gtimg.com/news/images/inews/2020/feiyan/area/icon_kj.png);
+    }
+  }
+  .hwfk {
+    &:before {
+      @include enterLeftLayout;
+      background-image: url(https://mat1.gtimg.com/news/feiyanarea/icon_hwfk.png);
+    }
+  }
+  .crjcx {
+    &:before {
+      @include enterLeftLayout;
+      background-image: url(https://mat1.gtimg.com/news/images/inews/2020/feiyan/area/icon_crj.png);
+    }
+  }
+  .hrjy {
+    &:before {
+      @include enterLeftLayout;
+      background-image: url(https://mat1.gtimg.com/news/feiyanarea/icon_hrjy.png);
     }
   }
 }

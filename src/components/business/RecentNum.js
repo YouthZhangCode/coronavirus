@@ -48,7 +48,7 @@ export default function RecentNum(props) {
     <div style={styles.wrap}>
       <div style={styles.change}>
         较上日
-        <span style={{color:props.color || constantStyle.textColor737}}>{props.change > 0 ? `+${props.change}` : `${props.change}`}</span>
+        <span style={{color:props.color || constantStyle.textColor737}}>{props.change > 0 ? '+'+props.change : props.change}</span>
       </div>
       <div style={styles.total}>{props.total}</div>
       <div style={styles.description}>{props.description}</div>

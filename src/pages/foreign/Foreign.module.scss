@@ -1,0 +1,15 @@
+@import "../../style/constant";
+
+.recentNumWrap {
+  display: flex;
+  margin: 0 2*$padding1 2*$padding1;
+  border-radius: 1.6vw;
+  overflow: hidden;
+  .recentNumWrapContent {
+    margin-right: .533vw;
+    flex: 1;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
