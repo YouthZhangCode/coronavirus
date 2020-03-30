@@ -188,7 +188,7 @@ const chinaMapOption = {
     trigger: 'item',
     enterable: true,
     // 使用函数模板，传入的数据值 ——> value: number | Array
-    formatter: '{b0} : {c0} <br /> <div onclick="__chinaMapToolTipClicked()">sss</div>',
+    formatter: '{b0} : {c0} <br /> <div onclick="__chinaMapToolTipClicked()"></div>',
 
   },
   // 视觉映射组件

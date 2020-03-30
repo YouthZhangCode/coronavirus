@@ -41,7 +41,15 @@ export class HomeStore {
   @observable importedAddOption = EchartsOptions.importedAdd;
   @observable importedTotalOption = EchartsOptions.importedTotal;
 
-  @action loadTodayData() {
+  areaTableLayOut = {
+    item0: `${22.4 / 89.333 * 100}%`,
+    item1: `${15.467 / 89.333 * 100}%`,
+    item2: `${15.467 / 89.333 * 100}%`,
+    item3: `${12 / 89.333 * 100}%`,
+    item4: `${12 / 89.333 * 100}%`
+  }
+
+@action loadTodayData() {
     return agent.Home.todayData()
             .then(res => {
               let resObj = JSON.parse(res.text)
@@ -77,11 +85,11 @@ export class HomeStore {
               this.chinaTree = this.areaTree[0] &&
                 this.areaTree[0].children.map(item =>{
                   let headerContents = [
-                    {content: item.name},
-                    {content: item.total.nowConfirm},
-                    {content: item.total.confirm},
-                    {content: item.total.heal},
-                    {content: item.total.dead},
+                    {content: item.name, style:{width: this.areaTableLayOut.item0}},
+                    {content: item.total.nowConfirm, style:{width: this.areaTableLayOut.item1}},
+                    {content: item.total.confirm, style:{width: this.areaTableLayOut.item2}},
+                    {content: item.total.heal, style:{width: this.areaTableLayOut.item3}},
+                    {content: item.total.dead, style:{width: this.areaTableLayOut.item4}},
                     {content: '详情', style:{color:'#005def', fontWeight:400}, onClick:this.chinaTreeDetailClicked.bind(this, item.name)},
                   ]
                   let childrenContents = item.children.map(item1 => {

@@ -34,7 +34,6 @@ class Home extends Component {
 
     window.onscroll = ()=> {
       let domScrollTop = document.body.scrollTop || document.documentElement.scrollTop;
-      console.log(domScrollTop , this.tableHeaderOffsetTop)
       if (domScrollTop > this.tableHeaderOffsetTop && !this.state.isTableHeaderFixed) {
         this.setState({
           isTableHeaderFixed: true
@@ -192,23 +191,25 @@ class Home extends Component {
             <div className={`${moduleScss.fixedTableHeader} ${this.state.isTableHeaderFixed ? undefined : moduleScss.hiddenHeader}`}>
               <MyTableHeader
                 titles={[
-                  {content:'地区', },
-                  {content:'现有确诊', style:{color:'#ff5d00', background:'#fcf2e8'}},
-                  {content:'累计确诊', style:{color:'#ff5253', background:'#fdeeee'}},
-                  {content:'治愈', style:{color:'#178b50', background:'#e7fce7'}},
-                  {content:'死亡', style:{color:'#4e5a65', background:'#f3f6f8'}},
-                  {content:'疫情', }]}
+                  {content:'地区', style:{width: this.props.homeStore.areaTableLayOut.item0}},
+                  {content:'现有确诊', style:{color:'#ff5d00', background:'#fcf2e8', width: this.props.homeStore.areaTableLayOut.item1}},
+                  {content:'累计确诊', style:{color:'#ff5253', background:'#fdeeee', width: this.props.homeStore.areaTableLayOut.item2}},
+                  {content:'治愈', style:{color:'#178b50', background:'#e7fce7', width: this.props.homeStore.areaTableLayOut.item3}},
+                  {content:'死亡', style:{color:'#4e5a65', background:'#f3f6f8', width: this.props.homeStore.areaTableLayOut.item4}},
+                  {content:'疫情' }
+                ]}
               />
             </div>
             <div id='tableHeaderWrap'>
               <MyTableHeader
                 titles={[
-                  {content:'地区', },
-                  {content:'现有确诊', style:{color:'#ff5d00', background:'#fcf2e8'}},
-                  {content:'累计确诊', style:{color:'#ff5253', background:'#fdeeee'}},
-                  {content:'治愈', style:{color:'#178b50', background:'#e7fce7'}},
-                  {content:'死亡', style:{color:'#4e5a65', background:'#f3f6f8'}},
-                  {content:'疫情', }]}
+                  {content:'地区', style:{width: this.props.homeStore.areaTableLayOut.item0}},
+                  {content:'现有确诊', style:{color:'#ff5d00', background:'#fcf2e8', width: this.props.homeStore.areaTableLayOut.item1}},
+                  {content:'累计确诊', style:{color:'#ff5253', background:'#fdeeee', width: this.props.homeStore.areaTableLayOut.item2}},
+                  {content:'治愈', style:{color:'#178b50', background:'#e7fce7', width: this.props.homeStore.areaTableLayOut.item3}},
+                  {content:'死亡', style:{color:'#4e5a65', background:'#f3f6f8', width: this.props.homeStore.areaTableLayOut.item4}},
+                  {content:'疫情' }
+                ]}
               />
             </div>
             {
