@@ -13,10 +13,12 @@ export default class EchartWrap extends Component {
     option: PropTypes.object.isRequired,
     title: PropTypes.string,
     showLegend: PropTypes.bool,
+    height: PropTypes.string,
   }
 
   static defaultProps = {
-    showLegend: true
+    showLegend: true,
+    height: '40vw',
   }
 
   constructor(props) {
@@ -52,7 +54,7 @@ export default class EchartWrap extends Component {
             }
           </div>
         </div>
-        <div id={this.props.option._id} style={styles.chart}>
+        <div id={this.props.option._id} style={{...styles.chart, ...{height: this.props.height}}}>
         </div>
       </div>
 
@@ -92,7 +94,6 @@ const styles = {
   },
   chart: {
     width: 'calc(100% - 6.4vw)',
-    height: '40vw',
     margin: '0 3.2vw',
   },
 

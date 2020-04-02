@@ -255,7 +255,197 @@ const chinaMapOption = {
   ]
 }
 
+const chinaForeignConfirmAdd = {
+  ...commonChartsOption,
+  _id: 'chinaForeignConfirmAdd',
+  legend: {
+    data: ['中国', '海外'],
+    // show: false,
+  },
+  series:[
+    {
+      name: '中国',
+      data: [],
+      type: 'line',
+      smooth: true,
+      color: '#ff7b7c',
+    },
+    {
+      name: '海外',
+      data: [],
+      type: 'line',
+      smooth: true,
+      color: '#9b0a0e',
+    },
+  ]
+}
+
+const chinaForeignConfirm = {
+  ...commonChartsOption,
+  _id: 'chinaForeignConfirm',
+  legend: {
+    data: ['中国累计', '中国现有', '海外累计', '海外现有'],
+    show: false,
+  },
+  series: [
+    {
+      name: '中国累计',
+      data: [],
+      type: 'line',
+      smooth: true,
+      color: '#ff7b7c',
+    },
+    {
+      name: '中国现有',
+      data: [],
+      type: 'line',
+      smooth: true,
+      color: '#ffd661',
+    },
+    {
+      name: '海外累计',
+      data: [],
+      type: 'line',
+      smooth: true,
+      color: '#9b0a0e',
+    },
+    {
+      name: '海外现有',
+      data: [],
+      type: 'line',
+      smooth: true,
+      color: '#ffa655',
+    },
+  ]
+}
+
+const chinaForeignHealRate = {
+  ...commonChartsOption,
+  legend: {
+    data: ['中国', '海外'],
+    show: false,
+  },
+  _id: 'chinaForeignHealRate',
+  series: [
+    {
+      name: '中国',
+      data: [],
+      type: 'line',
+      smooth: true,
+      color: '#acdb70',
+    },
+    {
+      name: '海外',
+      data: [],
+      type: 'line',
+      smooth: true,
+      color: '#2b7c74',
+    },
+  ]
+}
+
+const chinaForeignDeadRate = {
+  _id: 'chinaForeignDeadRate',
+  ...commonChartsOption,
+  legend: {
+    data: ['中国', '海外'],
+    show: false,
+  },
+  series: [
+    {
+      name: '中国',
+      data: [],
+      type: 'line',
+      smooth: true,
+      color: '#b07c4d',
+    },
+    {
+      name: '海外',
+      data: [],
+      type: 'line',
+      smooth: true,
+      color: '#2e75b6',
+    }
+  ]
+}
+
+const addConfirmTop10 = {
+  _id: 'addConfirmTop10',
+  ...commonChartsOption,
+  series: {
+    type: 'bar',
+    barWidth: '10px',
+    itemStyle: {
+      normal: {
+        color: function (params) {
+          var colorList = ['#ff2736', '#ff2736', '#ffa577','#ffa577','#ffa577','#ffa577','#ffa577','#ffcea0','#ffcea0','#ffcea0',]
+          return colorList[params.dataIndex]
+        }
+      }
+    }
+  }
+}
+
+const countryWeakRank = {
+  _id: 'countryWeakRank',
+  tooltip: {
+    trigger: 'axis'
+  },
+  grid: {
+    left: '0',
+    right: '0%',
+    bottom: '0',
+    top: '5%',
+    containLabel: true
+  },
+  yAxis: {
+    type: 'category',
+    axisTick: {
+      show: false,
+    },
+    axisLine: {
+      lineStyle: {
+        color: '#ccc',
+        width: 1,
+      }
+    },
+    axisLabel: {
+      fontSize: 7,
+      margin: 5,
+      fontWeight: 500,
+      color:'#888'
+    },
+
+  },
+  xAxis: {
+    type: 'value',
+    axisLine: {
+      show: false,
+    },
+    axisTick: {
+      show: false,
+    },
+    axisLabel: {
+      fontSize: 10,
+      fontWeight: 400,
+    }
+  },
+  series: {
+    type: 'bar',
+    barWidth: '10px',
+    itemStyle: {
+      normal: {
+        color: function (params) {
+          var colorList = ['#ff2736', '#ff2736', '#ffa577','#ffa577','#ffa577','#ffa577','#ffa577','#ffcea0','#ffcea0','#ffcea0',].reverse()
+          return colorList[params.dataIndex]
+        }
+      }
+    }
+  }
+}
+
 export {
+  // 国内
   chinaMapOption,
   chinaAddConfirmSuspect,
   chinaConfirmSuspectImported,
@@ -264,4 +454,11 @@ export {
   importedTop10,
   importedAdd,
   importedTotal,
+  // 国外
+  chinaForeignConfirmAdd,
+  chinaForeignConfirm,
+  chinaForeignDeadRate,
+  chinaForeignHealRate,
+  addConfirmTop10,
+  countryWeakRank,
 }

@@ -6,6 +6,7 @@
 import { observable, action } from 'mobx'
 
 import agent from '../agent'
+import foreignStore from './foreignStore'
 import * as EchartsOptions from '../common/EchartsOptions'
 
 export class HomeStore {
@@ -49,7 +50,7 @@ export class HomeStore {
     item4: `${12 / 89.333 * 100}%`
   }
 
-@action loadTodayData() {
+  @action loadTodayData() {
     return agent.Home.todayData()
             .then(res => {
               let resObj = JSON.parse(res.text)
@@ -269,6 +270,21 @@ export class HomeStore {
                 color: '#de1f05',
               }
             }
+
+            let chinaNewAddData = dailyNewAddHistory.map(item => item.country)
+            foreignStore.setChinaForeignConfirmAddOptionSeries(chinaNewAddData)
+
+            let chinaConfirmData = dailyHistory.map(item => item.country.dead + item.country.heal + item.country.nowConfirm)
+            foreignStore.setChinaForeignConfirmOptionSeries(0, chinaConfirmData)
+            let chinaNowConfirmData = dailyHistory.map(item => item.country.nowConfirm)
+            foreignStore.setChinaForeignConfirmOptionSeries(1, chinaNowConfirmData)
+
+            let chinaHealRateData = dailyHistory.map(item => item.country.healRate)
+            foreignStore.setChinaForeignHealRateSeries(chinaHealRateData)
+
+            let chinaDeadRateData = dailyHistory.map(item => item.country.deadRate)
+            foreignStore.setChinaForeignDeadRateSeries(chinaDeadRateData)
+
       }))
   }
 

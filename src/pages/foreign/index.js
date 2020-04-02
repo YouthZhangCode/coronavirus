@@ -6,7 +6,7 @@
 import React, { Component } from 'react';
 import {inject, observer} from 'mobx-react';
 
-import {RecentNum} from '../../components'
+import {RecentNum, EchartWrap, CarouselWrap} from '../../components'
 import moduleScss from './Foreign.module.scss';
 import homeModuleScss from '../home/Home.module.scss';
 
@@ -21,6 +21,8 @@ class Foreign extends Component {
         {this._renderHeader()}
         {this._renderPageTab()}
         {this._renderRecentNum()}
+        {this._renderChinaForeignComparisonCharts()}
+        <div style={{height:'200px', backgroundColor:'#999'}}></div>
       </div>
     )
   }
@@ -105,6 +107,21 @@ class Foreign extends Component {
             <span className={homeModuleScss.hrjy}>华人记疫</span>
           </a>
         </div>
+      </div>
+    )
+  }
+
+  _renderChinaForeignComparisonCharts() {
+    return(
+      <div>
+        <CarouselWrap dotNames={['中国/海外\n新增确诊','中国/海外\n确诊趋势','中国/海外\n治愈率','中国/海外\n病死率']}>
+          <EchartWrap title={'中国/海外新增确诊对比'} option={this.props.foreignStore.chinaForeignConfirmAddOption}/>
+          <EchartWrap title={'中国/海外确诊趋势对比'} option={this.props.foreignStore.chinaForeignConfirmOption}/>
+          <EchartWrap title={'中国/海外治愈率对比'} option={this.props.foreignStore.chinaForeignHealRateOption}/>
+          <EchartWrap title={'中国/海外病死率对比'} option={this.props.foreignStore.chinaForeignDeadRateOption}/>
+        </CarouselWrap>
+        <EchartWrap title={'昨日新增确诊国家TOP10'} showLegend={false} option={this.props.foreignStore.addConfirmTop10Option}/>
+        <EchartWrap height={'60vw'} title={'海外主要疫情国家-累计确诊七日增幅'} option={this.props.foreignStore.countryWeakRankOption}/>
       </div>
     )
   }

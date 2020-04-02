@@ -17,6 +17,21 @@ class Header extends Component{
     }
   }
 
+  componentDidMount() {
+    this.props.history.listen(route=>{
+      if (route.pathname === '/' && this.state.selected !== 0) {
+        this.setState({
+          selected: 0
+        })
+      } else if (route.pathname === '/foreign' && this.state.selected !== 1) {
+        this.setState({
+          selected: 1
+        })
+      }
+    })
+  }
+
+
   render() {
     return(
       <div>
