@@ -52,14 +52,6 @@ export class HomeStore {
 
   @action loadTodayData() {
     return agent.Home.todayData()
-            .then(res => {
-              let resObj = JSON.parse(res.text)
-              if (resObj.ret === 0) {
-                return JSON.parse(resObj.data)
-              } else {
-                // throw
-              }
-            })
             .then(action((data) => {
               let {
                 lastUpdateTime,
@@ -117,17 +109,6 @@ export class HomeStore {
 
   @action loadRecentData() {
     return agent.Home.recentData()
-      .then(res => {
-        if (res.ok || res.status === 2000 || res.statesText === "OK") {
-          return JSON.parse(res.text)
-        }
-      })
-      .then(json => {
-        if (json.ret === 0) {
-          console.log('recent data ---- \n', JSON.parse(json.data))
-          return JSON.parse(json.data)
-        }
-      })
       .then(action(({
                       chinaDayList,
                       chinaDayAddList,
@@ -290,14 +271,6 @@ export class HomeStore {
 
   @action loadTodayNotice() {
     agent.Home.todayNotice()
-      .then(res => {
-        let resObj = JSON.parse(res.text)
-        if (resObj.ret === 0) {
-          return JSON.parse(resObj.data)
-        } else {
-          // throw
-        }
-      })
       .then(action(data => {
         this.todayNotice = data
       }))

@@ -15,12 +15,23 @@ export default
 @observer
 class Foreign extends Component {
 
+  componentDidMount() {
+    this.props.foreignStore.loadForeignCountriesData()
+    this.props.foreignStore.loadEuropeCountriesData();
+    this.props.foreignStore.loadAsiaCountriesData();
+    this.props.foreignStore.loadNorthAmericaCountriesData();
+    this.props.foreignStore.loadAutoWeekContinentMillionData();
+    this.props.foreignStore.loadAutoContinentGlobalDailyListCountryConfirmAdd();
+    this.props.foreignStore.loadCountryRankListData();
+  }
+
   render() {
     return(
       <div>
         {this._renderHeader()}
         {this._renderPageTab()}
         {this._renderRecentNum()}
+        {this._renderForeignCountriesConfirmChart()}
         {this._renderChinaForeignComparisonCharts()}
         <div style={{height:'200px', backgroundColor:'#999'}}></div>
       </div>
@@ -111,6 +122,14 @@ class Foreign extends Component {
     )
   }
 
+  _renderForeignCountriesConfirmChart() {
+    return(
+      <div className={moduleScss.foreignCountriesConfirmChartWrap}>
+        <EchartWrap height={'60vw'} title={'海外多国累计确诊趋势'} option={this.props.foreignStore.foreignCountriesConfirmOption}/>
+      </div>
+    )
+  }
+
   _renderChinaForeignComparisonCharts() {
     return(
       <div>
@@ -120,8 +139,19 @@ class Foreign extends Component {
           <EchartWrap title={'中国/海外治愈率对比'} option={this.props.foreignStore.chinaForeignHealRateOption}/>
           <EchartWrap title={'中国/海外病死率对比'} option={this.props.foreignStore.chinaForeignDeadRateOption}/>
         </CarouselWrap>
-        <EchartWrap title={'昨日新增确诊国家TOP10'} showLegend={false} option={this.props.foreignStore.addConfirmTop10Option}/>
-        <EchartWrap height={'60vw'} title={'海外主要疫情国家-累计确诊七日增幅'} option={this.props.foreignStore.countryWeakRankOption}/>
+        <CarouselWrap dotNames={['昨日新增\n确诊TOP10', '欧洲多国\n新增确诊', '亚洲多国\n新增确诊', '北美多国\n新增确诊']}>
+          <EchartWrap title={'昨日新增确诊国家TOP10'} showLegend={false} option={this.props.foreignStore.addConfirmTop10Option}/>
+          <EchartWrap title={'欧洲多国新增确诊趋势'} option={this.props.foreignStore.europeCountriesAddConfirmOption}/>
+          <EchartWrap title={'亚洲多国新增确诊趋势'} option={this.props.foreignStore.asianCountriesAddConfirmOption}/>
+          <EchartWrap title={'北美多国新增确诊趋势'} option={this.props.foreignStore.northAmericaCountriesAddConfirmOption}/>
+        </CarouselWrap>
+        <div className={moduleScss.contentWeekConfirmChartWrap}>
+          <EchartWrap title={'海外现有确诊及各洲累计确诊周比'} option={this.props.foreignStore.continentWeekConfirmOption}/>
+        </div>
+        <CarouselWrap dotNames={['每百万人\n确诊数排行', '累计确诊\n七日增幅排行']}>
+          <EchartWrap height={'60vw'} title={'海外主要疫情国家-累计确诊七日增幅'} option={this.props.foreignStore.countryWeakRankOption}/>
+          <EchartWrap height={'60vw'} title={'海外主要疫情国家-每百万人确诊数'} option={this.props.foreignStore.millionConfirmRankOption}/>
+        </CarouselWrap>
       </div>
     )
   }

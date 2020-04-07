@@ -144,7 +144,7 @@ const importedTop10 = {
   ...commonChartsOption,
   series: {
     type: 'bar',
-    barWidth: '10px',
+    barWidth: '8px',
     itemStyle: {
       normal: {
         color: function (params) {
@@ -260,7 +260,7 @@ const chinaForeignConfirmAdd = {
   _id: 'chinaForeignConfirmAdd',
   legend: {
     data: ['中国', '海外'],
-    // show: false,
+    show: false,
   },
   series:[
     {
@@ -374,7 +374,7 @@ const addConfirmTop10 = {
   ...commonChartsOption,
   series: {
     type: 'bar',
-    barWidth: '10px',
+    barWidth: '8px',
     itemStyle: {
       normal: {
         color: function (params) {
@@ -432,7 +432,7 @@ const countryWeakRank = {
   },
   series: {
     type: 'bar',
-    barWidth: '10px',
+    barWidth: '8px',
     itemStyle: {
       normal: {
         color: function (params) {
@@ -444,7 +444,222 @@ const countryWeakRank = {
   }
 }
 
+const millionConfirmRank = {
+  ...countryWeakRank,
+  _id: 'millionConfirmRank',
+}
+
+const europeCountriesAddConfirm = {
+  _id: 'europeCountriesAddConfirm',
+  ...commonChartsOption,
+  legend: {
+    data: ['意大利', '西班牙', '德国', '法国'],
+    show: false,
+  },
+  series: [
+    {
+      type: 'line',
+      smooth: true,
+      data: [],
+      name: '意大利',
+      color: '#9b0a0e',
+    },
+    {
+      type: 'line',
+      smooth: true,
+      data: [],
+      name: '西班牙',
+      color: '#ff7b7c',
+    },{
+      type: 'line',
+      smooth: true,
+      data: [],
+      name: '德国',
+      color: '#ffa655',
+    },{
+      type: 'line',
+      smooth: true,
+      data: [],
+      name: '法国',
+      color: '#ffd661',
+    }],
+}
+
+const asianCountriesAddConfirm = {
+  _id: 'asianCountriesAddConfirm',
+  ...commonChartsOption,
+  legend: {
+    data: ['韩国', '日本', '伊朗'],
+    show: false,
+  },
+  series: [
+    {
+      name: '韩国',
+      type: 'line',
+      smooth: true,
+      data: [],
+      color: '#9b0a0e',
+    },{
+      name: '日本',
+      type: 'line',
+      smooth: true,
+      data: [],
+      color: '#ff7b7c',
+    },{
+      name: '伊朗',
+      type: 'line',
+      smooth: true,
+      data: [],
+      color: '#ffa655',
+    }],
+}
+
+const northAmericaCountriesAddConfirm = {
+  _id: 'northAmericaCountriesAddConfirm',
+  ...commonChartsOption,
+  legend: {
+    data: ['美国', '加拿大'],
+    show: false,
+  },
+  series: [
+    {
+      name: '美国',
+      type: 'line',
+      smooth: true,
+      data: [],
+      color: '#9b0a0e',
+    },{
+      name: '加拿大',
+      type: 'line',
+      smooth: true,
+      data: [],
+      color: '#ff7b7c',
+    }],
+}
+
+const foreignCountriesConfirm = {
+  _id: 'foreignCountriesConfirm',
+  ...commonChartsOption,
+  legend: {
+    data: ['意大利', '伊朗', '西班牙', '德国', '英国', '法国', '美国', '日本'],
+    show: false,
+  },
+  series: [{
+    name: '意大利',
+    type: 'line',
+    smooth: true,
+    data: [],
+    color: '#9b0a0e',
+  },{
+    name: '伊朗',
+    type: 'line',
+    smooth: true,
+    data: [],
+    color: '#ff7b7c',
+  },{
+    name: '西班牙',
+    type: 'line',
+    smooth: true,
+    data: [],
+    color: '#ffa655',
+  },{
+    name: '德国',
+    type: 'line',
+    smooth: true,
+    data: [],
+    color: '#ffd661',
+  },{
+    name: '英国',
+    type: 'line',
+    smooth: true,
+    data: [],
+    color: '#cd73bf',
+  },{
+    name: '法国',
+    type: 'line',
+    smooth: true,
+    data: [],
+    color: '#7e74eb',
+  },{
+    name: '美国',
+    type: 'line',
+    smooth: true,
+    data: [],
+    color: '#5591fa',
+  },{
+    name: '日本',
+    type: 'line',
+    smooth: true,
+    data: [],
+    color: '#60bbfc',
+  },],
+}
+
+const continentWeekConfirm = {
+  _id: 'continentWeekConfirm',
+  ...commonChartsOption,
+  legend: {
+    data: ['欧洲', '亚洲(不含中国)', '北美洲', '南美洲', '大洋洲', '非洲', '其他', '海外现有确诊'],
+    show: false,
+  },
+  series: [
+    {
+      name:'欧洲',
+      type: 'bar',
+      barWidth: 8,
+      stack: 'one',
+      barGap: 0,
+      data: [],
+      color: '#dd0b10',
+    },{
+      name:'亚洲',
+      type: 'bar',
+      stack: 'one',
+      data: [],
+      color: '#ff6060',
+    },{
+      name:'北美洲',
+      type: 'bar',
+      stack: 'one',
+      data: [],
+      color: '#ffa655',
+    },{
+      name:'南美洲',
+      type: 'bar',
+      stack: 'one',
+      data: [],
+      color: '#fedd7f',
+    },{
+      name:'大洋洲',
+      type: 'bar',
+      stack: 'one',
+      data: [],
+      color: '#ae79ff',
+    },{
+      name:'非洲',
+      type: 'bar',
+      stack: 'one',
+      data: [],
+      color: '#ffafe6',
+    },{
+      name:'其他',
+      type: 'bar',
+      stack: 'one',
+      data: [],
+      color: '#d7c7d2',
+    },{
+      name:'海外现有确诊',
+      type: 'bar',
+      barWidth: 8,
+      data: [],
+      color: '#92b8ff',
+    },
+  ],
+
+}
+
 export {
+
   // 国内
   chinaMapOption,
   chinaAddConfirmSuspect,
@@ -454,11 +669,22 @@ export {
   importedTop10,
   importedAdd,
   importedTotal,
+
   // 国外
+  foreignCountriesConfirm,
   chinaForeignConfirmAdd,
   chinaForeignConfirm,
   chinaForeignDeadRate,
   chinaForeignHealRate,
   addConfirmTop10,
+
+  // weekContinentMillion
   countryWeakRank,
+  millionConfirmRank,
+  continentWeekConfirm,
+
+  // 洲际
+  europeCountriesAddConfirm,
+  asianCountriesAddConfirm,
+  northAmericaCountriesAddConfirm,
 }

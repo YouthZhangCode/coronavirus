@@ -18,7 +18,7 @@ export default class EchartWrap extends Component {
 
   static defaultProps = {
     showLegend: true,
-    height: '40vw',
+    height: '45vw',
   }
 
   constructor(props) {
@@ -40,7 +40,7 @@ export default class EchartWrap extends Component {
       <div style={styles.wrap}>
         <div style={styles.titleWrap}>
           <div style={styles.title}>{this.props.title}</div>
-          <div style={styles.legendWrap}>
+          <div style={{...styles.legendWrap, margin:'1vw 0'}}>
             {
               this.props.showLegend && Array.isArray(this.props.option.series) &&
               this.props.option.series.map(
@@ -80,7 +80,7 @@ const styles = {
   legendWrap: {
     display: 'flex',
     alignItems: 'center',
-    height: '6.667vw',
+    flexWrap: 'wrap',
   },
   legendRect: {
     width: '2.667vw',
