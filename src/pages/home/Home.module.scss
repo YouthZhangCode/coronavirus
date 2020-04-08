@@ -292,39 +292,42 @@
   .chinaMap {
     height: 100vw;
   }
-  .chinaMapBtns {
-    position: absolute;
-    top: 0;
-    left: 2*$padding1;
-    span {
-      margin: 0 -0.5px;
-      position: relative;
-      border: 1px solid #efefef;
-      font-size: 3.2vw;
-      width: 17.067vw;
-      display: inline-block;
-      text-align: center;
-      padding: .8vw 0;
-      &:first-child {
-        border-radius: 1.6vw 0 0 1.6vw;
-      }
-      &:nth-child(2) {
-        border-radius: 0 1.6vw 1.6vw 0;
-      }
-
-    }
-    .chinaMapBtnSelected {
-      background-color: #eef4ff;
-      border-color: #ccdeff;
-      color: #005dff;
-      z-index: 2;
-    }
-  }
 }
 
-.chinaListWrap {
+.chinaMapBtns {
+  position: absolute;
+  top: 0;
+  left: 2*$padding1;
+}
+
+.segmentBtn {
+  margin: 0 -0.5px;
+  position: relative;
+  border: 1px solid #efefef;
+  font-size: 3.2vw;
+  display: inline-block;
+  text-align: center;
+  padding: .8vw 2vw;
+  &:first-child {
+    border-radius: 1.6vw 0 0 1.6vw;
+  }
+  &:nth-child(2) {
+    border-radius: 0 1.6vw 1.6vw 0;
+  }
+
+}
+
+.chinaMapBtnSelected {
+  background-color: #eef4ff;
+  border-color: #ccdeff;
+  color: #005dff;
+  z-index: 2;
+}
+
+.listWrap {
   margin: 4vw 2*$padding1 0;
 }
+
 .fixedTableHeader {
   position: fixed;
   top: 11.733vw;

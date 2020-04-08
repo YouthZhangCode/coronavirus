@@ -20,3 +20,16 @@
 .contentWeekConfirmChartWrap {
   margin-top: 2*$padding1;
 }
+.foreignStatisWrap {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  padding: 2*$padding1 0;
+  align-items: center;
+}
+
+.foreignStatisTitle {
+  font-size: 4.267vw;
+  font-weight: 500;
+  color: #222;
+}

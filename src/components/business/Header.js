@@ -12,8 +12,12 @@ class Header extends Component{
 
   constructor(props) {
     super(props)
+    let routeIndex = 0, pathname = props.history.location.pathname;
+    if ( pathname === '/foreign') {
+      routeIndex = 1;
+    }
     this.state = {
-      selected:0
+      selected: routeIndex
     }
   }
 

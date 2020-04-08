@@ -30,6 +30,10 @@ class Home extends Component {
     this.tableHeaderOffsetTop = document.getElementById('tableHeaderWrap').offsetTop - 0.11733*(window.innerWidth)
   }
 
+  componentWillUnmount() {
+    window.onscroll = null;
+  }
+
   componentDidMount() {
 
     window.onscroll = ()=> {
@@ -110,7 +114,7 @@ class Home extends Component {
           {/*PageTab*/}
           <div className={`${moduleScss.pageTab} ${moduleScss.leftSelected}`}>
             <p className={moduleScss.pageTabCurrent}>国内疫情</p>
-            <p>海外疫情</p>
+            <p onClick={()=>{this.props.history.push('./foreign')}}>海外疫情</p>
           </div>
 
           {/*天幕*/}
@@ -173,8 +177,8 @@ class Home extends Component {
             <div id={'chinaMap'} className={moduleScss.chinaMap}>
             </div>
             <div className={moduleScss.chinaMapBtns}>
-              <span onClick={()=>{this.chinaMapBtnClicked(0)}} className={this.state.chinaMapBtnSelectedIndex === 0 ? moduleScss.chinaMapBtnSelected : undefined}>现有确诊</span>
-              <span onClick={()=>{this.chinaMapBtnClicked(1)}} className={this.state.chinaMapBtnSelectedIndex === 1 ? moduleScss.chinaMapBtnSelected : undefined}>累计确诊</span>
+              <span onClick={()=>{this.chinaMapBtnClicked(0)}} className={`${moduleScss.segmentBtn} ${this.state.chinaMapBtnSelectedIndex === 0 ? moduleScss.chinaMapBtnSelected : undefined}`}>现有确诊</span>
+              <span onClick={()=>{this.chinaMapBtnClicked(1)}} className={`${moduleScss.segmentBtn} ${this.state.chinaMapBtnSelectedIndex === 1 ? moduleScss.chinaMapBtnSelected : undefined}`}>累计确诊</span>
             </div>
           </div>
 
@@ -193,7 +197,7 @@ class Home extends Component {
           </CarouselWrap>
 
           {/* 国内疫情列表 */}
-          <div className={moduleScss.chinaListWrap}>
+          <div className={moduleScss.listWrap}>
             <div className={`${moduleScss.fixedTableHeader} ${this.state.isTableHeaderFixed ? undefined : moduleScss.hiddenHeader}`}>
               <MyTableHeader
                 titles={[

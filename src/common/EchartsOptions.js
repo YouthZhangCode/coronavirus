@@ -148,7 +148,7 @@ const importedTop10 = {
     itemStyle: {
       normal: {
         color: function (params) {
-          var colorList = ['#ff2736', '#ff2736', '#ff2736','#ff2736','#ffa577','#ffa577','#ffa577','#ffcea0','#ffcea0','#ffcea0',]
+          let colorList = ['#ff2736', '#ff2736', '#ff2736','#ff2736','#ffa577','#ffa577','#ffa577','#ffcea0','#ffcea0','#ffcea0',]
           return colorList[params.dataIndex]
         }
       }

@@ -8,6 +8,25 @@ import { action, observable } from 'mobx';
 import agent from '../agent';
 import * as EchartsOptions from '../common/EchartsOptions'
 
+const areaTableLayOut = {
+  item0: {width: '22.4vw', fontSize:'3.733vw', color:'#222'},
+  item1: {width: '14.2vw', fontSize:'3.733vw', color:'#222'},
+  item2: {width: '16vw', fontSize:'3.733vw', color:'#222'},
+  item3: {width: '13vw', fontSize:'3.733vw', color:'#222'},
+  item4: {width: '11.2vw', fontSize:'3.733vw', color:'#222'},
+  item5: { fontSize:'3.733vw', color:'#005def'},
+}
+
+const tableHeaderLayOut = {
+  item0: {width: '22.4vw', fontWeight: 500, background: '#f5f5f5', borderTop:'1px solid #fff'},
+  item1: {width: '14.2vw', fontWeight: 500, background: '#f5f5f5', borderTop:'1px solid #fff'},
+  item2: {width: '16vw', fontWeight: 500, background: '#f5f5f5', borderTop:'1px solid #fff'},
+  item3: {width: '13vw', fontWeight: 500, background: '#f5f5f5', borderTop:'1px solid #fff'},
+  item4: {width: '11.2vw', fontWeight: 500, background: '#f5f5f5', borderTop:'1px solid #fff'},
+  item5: {fontWeight: 500, background: '#f5f5f5', borderTop:'1px solid #fff'},
+
+}
+
 export class ForeignStore  {
 
   @observable importedTop10Option = EchartsOptions.importedTop10;
@@ -24,15 +43,9 @@ export class ForeignStore  {
   @observable northAmericaCountriesAddConfirmOption = EchartsOptions.northAmericaCountriesAddConfirm;
   @observable foreignCountriesConfirmOption = EchartsOptions.foreignCountriesConfirm;
 
-  @observable countryRankList = {
-    Europe: [],
-    NorthAmerica: [],
-    Asia: [],
-    SouthAmerica: [],
-    Afica: [],
-    Oceanica: [],
-    other: [],
-  };
+  @observable continentListData = [];
+  @observable countryListData = [];
+
 
   @observable globalStatis = {}
 
@@ -115,7 +128,7 @@ export class ForeignStore  {
       agent.Foreign.countryData('美国'),
       agent.Foreign.countryData('日本本土'),
     ])
-      .then(res => {
+      .then(action(res => {
         res.map((countryList, index)=>{
           countryList = countryList.filter(item => item.date > '02.24')
           this.foreignCountriesConfirmOption.series[index].data = countryList.map(item => item.confirm)
@@ -123,7 +136,7 @@ export class ForeignStore  {
             this.foreignCountriesConfirmOption.xAxis.data = countryList.map(item => item.date)
           }
         })
-      })
+      }))
   }
 
   @action loadEuropeCountriesData() {
@@ -231,17 +244,69 @@ export class ForeignStore  {
   @action loadCountryRankListData() {
     agent.Foreign.countryRankListData()
       .then((res) => {
-        this.countryRankList.Europe = res.filter(item => item.continent === '欧洲');
-        this.countryRankList.NorthAmerica = res.filter(item => item.continent === '北美洲');
-        this.countryRankList.Asia = res.filter(item => item.continent === '亚洲');
-        this.countryRankList.SouthAmerica = res.filter(item => item.continent === '南美洲');
-        this.countryRankList.Afica = res.filter(item => item.continent === '非洲');
-        this.countryRankList.Oceanica = res.filter(item => item.continent === '大洋洲');
-        this.countryRankList.other = res.filter(item => item.continent === '其他');
+
+        this.countryListData = res.map(item => {
+          return [
+            {content: item.name, style: areaTableLayOut.item0},
+            {content: item.confirmAdd, style: areaTableLayOut.item1},
+            {content: item.confirm, style: areaTableLayOut.item2},
+            {content: item.heal, style: areaTableLayOut.item3},
+            {content: item.dead, style: areaTableLayOut.item4},
+            {content: '详情', style: areaTableLayOut.item5, onClick: this.countryListItemClicked.bind(this,item)},
+          ]
+        })
+
+        let Europe = res.filter(item => item.continent === '欧洲');
+        let NorthAmerica = res.filter(item => item.continent === '北美洲');
+        let Asia = res.filter(item => item.continent === '亚洲');
+        let SouthAmerica = res.filter(item => item.continent === '南美洲');
+        let Afica = res.filter(item => item.continent === '非洲');
+        let Oceanica = res.filter(item => item.continent === '大洋洲');
+        let other = res.filter(item => item.continent === '其他');
+
+        let continentList = [Europe, NorthAmerica, Asia, SouthAmerica, Afica, Oceanica, other];
+
+        this.continentListData = continentList.map(continent => {
+          let name = '', confirmAdd = 0, confirm = 0, heal = 0, dead = 0;
+
+          let childrenContents = continent.map(country => {
+            name = country.continent
+            confirmAdd += country.confirmAdd;
+            confirm += country.confirm;
+            heal += country.heal;
+            dead += country.dead;
+            return [
+              {content: country.name, style: areaTableLayOut.item0},
+              {content: country.confirmAdd, style: areaTableLayOut.item1},
+              {content: country.confirm, style: areaTableLayOut.item2},
+              {content: country.heal, style: areaTableLayOut.item3},
+              {content: country.dead, style: areaTableLayOut.item4},
+              {content: '详情', style: areaTableLayOut.item5, onClick: this.countryListItemClicked.bind(this,country)},
+            ]
+          })
+
+          let headerContents = [
+            {content: `${name}(${continent.length})`, style: tableHeaderLayOut.item0},
+            {content: confirmAdd, style: tableHeaderLayOut.item1},
+            {content: confirm, style: tableHeaderLayOut.item2},
+            {content: heal, style: tableHeaderLayOut.item3},
+            {content: dead, style: tableHeaderLayOut.item4},
+            {content: '', style: tableHeaderLayOut.item5}
+          ]
+          return {
+            headerContents,
+            childrenContents,
+          }
+
+        })
+
         console.log('countryRankListData', res);
       })
   }
 
+  countryListItemClicked(item) {
+    console.log('countryListItemClicked', item);
+  }
 
 }
 

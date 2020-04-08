@@ -6,14 +6,30 @@
 import React, { Component } from 'react';
 import {inject, observer} from 'mobx-react';
 
-import {RecentNum, EchartWrap, CarouselWrap} from '../../components'
+import {RecentNum, EchartWrap, CarouselWrap, MyTableHeader, MyTable} from '../../components'
 import moduleScss from './Foreign.module.scss';
 import homeModuleScss from '../home/Home.module.scss';
+
+const tableHeaderStyle = {
+  item0: {width: '22.4vw',},
+  item1: {width: '14.2vw', background:'#e8effc', color:'#005dff'},
+  item2: {width: '16vw', background:'#fdeeee', color:'#f55253'},
+  item3: {width: '13vw', background:'#e9f7ec', color:'#178b50'},
+  item4: {width: '11.2vw', background:'#f3f6f8', color:'#4e5a65'},
+}
 
 export default
 @inject('homeStore', 'foreignStore')
 @observer
 class Foreign extends Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      hideFixedHeader: true,
+      foreignStatisIndex: 1,
+    }
+  }
 
   componentDidMount() {
     this.props.foreignStore.loadForeignCountriesData()
@@ -23,6 +39,27 @@ class Foreign extends Component {
     this.props.foreignStore.loadAutoWeekContinentMillionData();
     this.props.foreignStore.loadAutoContinentGlobalDailyListCountryConfirmAdd();
     this.props.foreignStore.loadCountryRankListData();
+
+    window.onscroll = () => {
+      let domScrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+      if (domScrollTop > this.tableHeaderOffsetTop && this.state.hideFixedHeader) {
+        this.setState({
+          hideFixedHeader: false
+        })
+      } else if (domScrollTop < this.tableHeaderOffsetTop && !this.state.hideFixedHeader) {
+        this.setState({
+          hideFixedHeader: true
+        })
+      }
+    }
+  }
+
+  componentDidUpdate() {
+    this.tableHeaderOffsetTop = document.getElementById('tableHeader').offsetTop - 0.11733*(window.innerWidth);
+  }
+
+  componentWillUnmount() {
+    window.onscroll = null;
   }
 
   render() {
@@ -33,6 +70,7 @@ class Foreign extends Component {
         {this._renderRecentNum()}
         {this._renderForeignCountriesConfirmChart()}
         {this._renderChinaForeignComparisonCharts()}
+        {this._renderCountryRankList()}
         <div style={{height:'200px', backgroundColor:'#999'}}></div>
       </div>
     )
@@ -55,7 +93,7 @@ class Foreign extends Component {
   _renderPageTab() {
     return(
       <div className={`${homeModuleScss.pageTab} ${homeModuleScss.rightSelected}`}>
-        <p>国内疫情</p>
+        <p onClick={()=>{this.props.history.push('/')}}>国内疫情</p>
         <p className={homeModuleScss.pageTabCurrent}>海外疫情</p>
       </div>
     )
@@ -152,6 +190,68 @@ class Foreign extends Component {
           <EchartWrap height={'60vw'} title={'海外主要疫情国家-累计确诊七日增幅'} option={this.props.foreignStore.countryWeakRankOption}/>
           <EchartWrap height={'60vw'} title={'海外主要疫情国家-每百万人确诊数'} option={this.props.foreignStore.millionConfirmRankOption}/>
         </CarouselWrap>
+      </div>
+    )
+  }
+
+  _renderCountryRankList() {
+    return(
+      <div className={homeModuleScss.listWrap}>
+        <div className={moduleScss.foreignStatisWrap}>
+          <p className={moduleScss.foreignStatisTitle}>海外疫情</p>
+          <div>
+            <span
+              onClick={()=>{
+                this.setState({
+                  foreignStatisIndex: 0
+                })
+              }}
+              className={`${homeModuleScss.segmentBtn} ${this.state.foreignStatisIndex === 0 ? homeModuleScss.chinaMapBtnSelected : null}`}>
+              按大洲查看
+            </span>
+            <span
+              onClick={()=>{
+                this.setState({
+                  foreignStatisIndex: 1
+                })
+              }}
+              className={`${homeModuleScss.segmentBtn} ${this.state.foreignStatisIndex === 1 ? homeModuleScss.chinaMapBtnSelected : null}`}>
+              按国家查看
+            </span>
+          </div>
+        </div>
+        <div className={`${homeModuleScss.fixedTableHeader} ${this.state.hideFixedHeader ? homeModuleScss.hiddenHeader : null}`}>
+          <MyTableHeader
+            titles={[
+              {content:'地区', style: tableHeaderStyle.item0},
+              {content:'新增确诊', style: tableHeaderStyle.item1},
+              {content:'累计确诊', style: tableHeaderStyle.item2},
+              {content:'治愈', style: tableHeaderStyle.item3},
+              {content:'死亡', style: tableHeaderStyle.item4},
+              {content:'疫情' }
+            ]}
+          />
+        </div>
+        <div id='tableHeader'>
+          <MyTableHeader
+            titles={[
+              {content:'地区', style: tableHeaderStyle.item0},
+              {content:'新增确诊', style: tableHeaderStyle.item1},
+              {content:'累计确诊', style: tableHeaderStyle.item2},
+              {content:'治愈', style: tableHeaderStyle.item3},
+              {content:'死亡', style: tableHeaderStyle.item4},
+              {content:'疫情' }
+            ]}
+          />
+
+        </div>
+        {
+          this.state.foreignStatisIndex === 1
+          ? <MyTable showChildren={true} headerContents={[]} childrenContents={this.props.foreignStore.countryListData}/>
+          : this.props.foreignStore.continentListData.map((continent, index) =>
+              <MyTable key={index} headerContents={continent.headerContents} childrenContents={continent.childrenContents}/>
+            )
+        }
       </div>
     )
   }

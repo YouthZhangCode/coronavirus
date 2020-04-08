@@ -33,13 +33,20 @@ export class MyTable extends Component {
 
   static propTypes = {
     headerContents: PropTypes.array.isRequired,
-    childrenContents: PropTypes.array
+    childrenContents: PropTypes.array,
+    showChildren: PropTypes.bool,
+  }
+
+  static defaultProps = {
+    showChildren: false,
+    headerContents: [],
+    childrenContents: [],
   }
 
   constructor(props) {
     super(props)
     this.state = {
-      showChildren: false
+      showChildren: props.showChildren
     }
   }
 

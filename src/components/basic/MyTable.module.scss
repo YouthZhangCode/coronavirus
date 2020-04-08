@@ -10,6 +10,10 @@ table {
   font-size: 3.2vw;
   font-weight: 400;
   color: #222;
+  &:first-child {
+    text-align: left;
+    padding-left: 3vw
+  };
   &:last-child {
     border-right: 0;
   }
