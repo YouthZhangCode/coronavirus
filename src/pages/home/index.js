@@ -31,6 +31,7 @@ class Home extends Component {
   }
 
   componentWillUnmount() {
+    console.log('componentWillUnmount')
     window.onscroll = null;
   }
 
@@ -49,9 +50,6 @@ class Home extends Component {
       }
     }
 
-    this.props.homeStore.loadRecentData()
-    this.props.homeStore.loadTodayNotice()
-    this.props.foreignStore.loadForeignData()
     this.props.homeStore.loadTodayData()
       .then(res => {
         this.chinaMap.setOption({

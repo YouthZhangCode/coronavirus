@@ -13,6 +13,17 @@ const stores = {
   foreignStore,
 }
 
+homeStore.loadRecentData()
+homeStore.loadTodayNotice()
+foreignStore.loadForeignData()
+foreignStore.loadForeignCountriesData()
+foreignStore.loadEuropeCountriesData();
+foreignStore.loadAsiaCountriesData();
+foreignStore.loadNorthAmericaCountriesData();
+foreignStore.loadAutoWeekContinentMillionData();
+foreignStore.loadAutoContinentGlobalDailyListCountryConfirmAdd();
+foreignStore.loadCountryRankListData();
+
 window.____APP_STATE____ = stores
 
 ReactDOM.render((

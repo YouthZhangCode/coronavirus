@@ -3,7 +3,7 @@
  * @Date: 2020/3/24 5:28 PM
  * @Author: Youth
  */
-import React, { Component } from 'react';
+import React, { Component, PureComponent } from 'react';
 import echarts from 'echarts';
 import PropTypes from 'prop-types';
 
@@ -23,12 +23,14 @@ export default class EchartWrap extends Component {
 
   constructor(props) {
     super(props)
+    this.state = {
+      state1: 1
+    }
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    console.log('componentWillReceiveProps')
-    this.chart.setOption(nextProps.option)
-  }
+  // UNSAFE_componentWillReceiveProps(nextProps) {
+  //   this.chart.setOption(nextProps.option)
+  // }
 
   componentDidMount() {
     this.chart = echarts.init(document.getElementById(this.props.option._id))

@@ -197,9 +197,6 @@ export class ForeignStore  {
         FAutoContinentConfirmStatis,
         FAutoConfirmMillionRankList,
       }) => {
-        console.log('autoWeekContinentMillionData', {FAutoCountryWeekCompRank,
-          FAutoContinentConfirmStatis,
-          FAutoConfirmMillionRankList,})
         // 主要疫情国累计七日增幅rank
         FAutoCountryWeekCompRank.reverse();
         this.countryWeakRankOption.yAxis.data = FAutoCountryWeekCompRank.map(item => item.nation);
@@ -221,12 +218,6 @@ export class ForeignStore  {
                FAutoGlobalDailyList,
                FAutoCountryConfirmAdd,
              }) => {
-        console.log('autoContinentGlobalDailyListCountryConfirmAdd',{
-          FAutoGlobalStatis,
-          FAutoContinentStatis,
-          FAutoGlobalDailyList,
-          FAutoCountryConfirmAdd,
-        });
         FAutoContinentStatis = FAutoContinentStatis.slice(FAutoContinentStatis.length-7, FAutoContinentStatis.length);
         this.continentWeekConfirmOption.xAxis.data = FAutoContinentStatis.map(item => item.date);
         this.continentWeekConfirmOption.series[0].data = FAutoContinentStatis.map(item => item.statis['欧洲']);
@@ -300,7 +291,6 @@ export class ForeignStore  {
 
         })
 
-        console.log('countryRankListData', res);
       })
   }
 
