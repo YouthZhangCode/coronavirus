@@ -2,7 +2,7 @@ import React from 'react';
 import {Route, Switch} from 'react-router';
 import {BrowserRouter as Router} from 'react-router-dom';
 
-import {Home, Foreign} from './pages'
+import {Home, Foreign, Province} from './pages'
 import {Header} from './components'
 
 function App() {
@@ -13,6 +13,7 @@ function App() {
         <Switch>
           <Route exact path='/' component={Home}/>
           <Route path={'/foreign'} component={Foreign}/>
+          <Route path={"/province/:id?"} component={Province}/>
         </Switch>
       </div>
     </Router>

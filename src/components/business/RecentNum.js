@@ -4,6 +4,7 @@
  * @Author: Youth
  */
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import constantStyle from '../../style/constant.scss'
 
@@ -48,10 +49,18 @@ export default function RecentNum(props) {
     <div style={styles.wrap}>
       <div style={styles.change}>
         较上日
-        <span style={{color:props.color || constantStyle.textColor737}}>{props.change > 0 ? '+'+props.change : props.change}</span>
+        <span style={{color:props.color || constantStyle.textColor737}}>{props.change >= 0 ? '+'+props.change : props.change}</span>
       </div>
       <div style={styles.total}>{props.total}</div>
       <div style={styles.description}>{props.description}</div>
     </div>
   )
+}
+
+RecentNum.propTypes = {
+  change: PropTypes.number,
+  total: PropTypes.number,
+  description: PropTypes.string,
+  backgroundColor: PropTypes.string,
+  color: PropTypes.string,
 }

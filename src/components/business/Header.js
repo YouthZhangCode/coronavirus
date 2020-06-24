@@ -5,79 +5,80 @@
  */
 import React, {Component} from 'react'
 import {withRouter} from 'react-router'
+import { observer } from 'mobx-react'
 
+import { useStores } from "../../hocks"
 import moduleScss from './Header.module.scss'
 
-class Header extends Component{
+const Header = observer((props) => {
 
-  constructor(props) {
-    super(props)
-    let routeIndex = 0, pathname = props.history.location.pathname;
-    if ( pathname === '/foreign') {
-      routeIndex = 1;
-    }
-    this.state = {
-      selected: routeIndex
-    }
-  }
+  const { routeStore } = useStores();
 
-  componentDidMount() {
-    this.props.history.listen(route=>{
-      if (route.pathname === '/' && this.state.selected !== 0) {
-        this.setState({
-          selected: 0
-        })
-      } else if (route.pathname === '/foreign' && this.state.selected !== 1) {
-        this.setState({
-          selected: 1
-        })
-      }
-    })
-  }
-
-
-  render() {
-    return(
-      <div>
-        <div className={moduleScss.navHide}>
-          <div className={moduleScss.navWrapper}>
-            <div className={moduleScss.hidden}>
-              <div ref='aaa' className={`${moduleScss.navBar} ${moduleScss.view}`}>
-                <div onClick={()=>{this.itemSelected(0)}} className={`${moduleScss.navItem} ${moduleScss.itemHome} ${this.state.selected === 0 && moduleScss.active}`}>国内疫情</div>
-                <div onClick={()=>{this.itemSelected(1)}} className={`${moduleScss.navItem} ${moduleScss.itemForeign} ${this.state.selected === 1 && moduleScss.active}`}>海外疫情</div>
-                <div onClick={()=>{this.itemSelected(2)}} className={`${moduleScss.navItem} ${moduleScss.itemHubei} ${this.state.selected === 2 && moduleScss.active}`}>湖北疫情</div>
-                <div onClick={()=>{this.itemSelected(3)}} className={`${moduleScss.navItem} ${this.state.selected === 3 && moduleScss.active}`}>最新进展</div>
-                <div onClick={()=>{this.itemSelected(4)}} className={`${moduleScss.navItem} ${this.state.selected === 4 && moduleScss.active}`}>定点医院</div>
-                <div onClick={()=>{this.itemSelected(5)}} className={`${moduleScss.navItem} ${this.state.selected === 5 && moduleScss.active}`}>韩国疫情</div>
-                <div onClick={()=>{this.itemSelected(6)}} className={`${moduleScss.navItem} ${this.state.selected === 6 && moduleScss.active}`}>病患轨迹</div>
-                <div onClick={()=>{this.itemSelected(7)}} className={`${moduleScss.navItem} ${this.state.selected === 7 && moduleScss.active}`}>较真辟谣</div>
-                <div onClick={()=>{this.itemSelected(8)}} className={`${moduleScss.navItem} ${this.state.selected === 8 && moduleScss.active}`}>复工信息</div>
-                <div onClick={()=>{this.itemSelected(9)}} className={`${moduleScss.navItem} ${this.state.selected === 9 && moduleScss.active}`}>交通信息</div>
+  return(
+    <div>
+      <div className={moduleScss.navHide}>
+        <div className={moduleScss.navWrapper}>
+          <div className={moduleScss.hidden}>
+            <div className={`${moduleScss.navBar} ${moduleScss.view}`}>
+              <div onClick={() => {
+                itemSelected(0)
+              }}
+                   className={`${moduleScss.navItem} ${moduleScss.itemHome} ${routeStore.slideIndex === 0 && moduleScss.active}`}>国内疫情
+              </div>
+              <div onClick={() => {
+                itemSelected(1)
+              }}
+                   className={`${moduleScss.navItem} ${moduleScss.itemForeign} ${routeStore.slideIndex === 1 && moduleScss.active}`}>海外疫情
+              </div>
+              <div onClick={() => {
+                itemSelected(2)
+              }}
+                   className={`${moduleScss.navItem} ${moduleScss.itemHubei} ${routeStore.slideIndex === 2 && moduleScss.active}`}>{`${routeStore.province}疫情`}</div>
+              <div onClick={() => {
+                itemSelected(3)
+              }} className={`${moduleScss.navItem} ${routeStore.slideIndex === 3 && moduleScss.active}`}>最新进展
+              </div>
+              <div onClick={() => {
+                itemSelected(4)
+              }} className={`${moduleScss.navItem} ${routeStore.slideIndex === 4 && moduleScss.active}`}>定点医院
+              </div>
+              <div onClick={() => {
+                itemSelected(5)
+              }} className={`${moduleScss.navItem} ${routeStore.slideIndex === 5 && moduleScss.active}`}>韩国疫情
+              </div>
+              <div onClick={() => {
+                itemSelected(6)
+              }} className={`${moduleScss.navItem} ${routeStore.slideIndex === 6 && moduleScss.active}`}>病患轨迹
+              </div>
+              <div onClick={() => {
+                itemSelected(7)
+              }} className={`${moduleScss.navItem} ${routeStore.slideIndex === 7 && moduleScss.active}`}>较真辟谣
+              </div>
+              <div onClick={() => {
+                itemSelected(8)
+              }} className={`${moduleScss.navItem} ${routeStore.slideIndex === 8 && moduleScss.active}`}>复工信息
+              </div>
+              <div onClick={() => {
+                itemSelected(9)
+              }} className={`${moduleScss.navItem} ${routeStore.slideIndex === 9 && moduleScss.active}`}>交通信息
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
     )
-  }
 
-  itemSelected(index) {
-    this.setState({
-      selected: index
-    })
+  function itemSelected(index) {
     if (index === 0) {
-      this.props.history.push('/')
+      props.history.push('/')
     } else if (index === 1) {
-      this.props.history.push('./foreign')
+      props.history.push('/foreign')
+    } else if (index === 2) {
+      props.history.push('/province/' + routeStore.province)
     }
   }
 
-  scrollTo() {
-    console.log(11111)
-    // let bodyWidth = window.document.body.offsetWidth;
-    this.refs.aaa.scrollTo(370,0);
-    // this.refs.aaa.style.transform = 'translateX(-50%)'
-  }
-}
+})
 
 export default withRouter(Header)

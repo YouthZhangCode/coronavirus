@@ -87,7 +87,13 @@ const Foreign = {
     request.get('https://api.inews.qq.com', '/newsqa/v1/automation/foreign/country/ranklist'),
 }
 
+const Province = {
+  provinceJson: (province) =>
+    request.get('https://mat1.gtimg.com', `/news/feiyanarea/${province}.json`)
+}
+
 export default {
   Home,
-  Foreign
+  Foreign,
+  Province,
 }

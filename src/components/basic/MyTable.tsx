@@ -4,22 +4,21 @@
  * @Author: Youth
  */
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
 import moduleScss from './MyTable.module.scss';
 
-export class MyTableHeader extends Component {
+interface MyTableHeaderProps {
+  titles: any[]
+}
 
-  static propTypes = {
-    titles: PropTypes.array.isRequired
-  }
+export class MyTableHeader extends Component<MyTableHeaderProps> {
 
   render() {
     return(
       <table>
         <thead>
           <tr>
-            {this.props.titles.map((item, index) =>
+            {this.props.titles.map((item:any, index:number) =>
               <th className={moduleScss.blockTh} key={index} style={{...item.style}}>{item.content}</th>
             )}
           </tr>
@@ -29,13 +28,17 @@ export class MyTableHeader extends Component {
   }
 }
 
-export class MyTable extends Component {
+interface MyTableProps {
+  headerContents: any[]
+  childrenContents: any[],
+  showChildren: boolean,
+}
 
-  static propTypes = {
-    headerContents: PropTypes.array.isRequired,
-    childrenContents: PropTypes.array,
-    showChildren: PropTypes.bool,
-  }
+interface MyTableState {
+  showChildren: boolean
+}
+
+export class MyTable extends Component<MyTableProps, MyTableState> {
 
   static defaultProps = {
     showChildren: false,
@@ -43,8 +46,8 @@ export class MyTable extends Component {
     childrenContents: [],
   }
 
-  constructor(props) {
-    super(props)
+  constructor(props: MyTableProps) {
+    super(props);
     this.state = {
       showChildren: props.showChildren
     }
@@ -80,7 +83,7 @@ export class MyTable extends Component {
             return(
               <tr key={index0} className={moduleScss.subTableBody}>
                 {
-                  item.map((item1, index) => {
+                  item.map((item1:any, index:number) => {
                     if (index === 0) {
                       return (
                         <th key={index} style={{...item1.style}} onClick={item1.onClick}>{item1.content}</th>

@@ -7,10 +7,12 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import homeStore from './stores/homeStore';
 import foreignStore from './stores/foreignStore';
+import routeStore from './stores/routeStore';
 
 const stores = {
   homeStore,
   foreignStore,
+  routeStore,
 }
 
 homeStore.loadRecentData()

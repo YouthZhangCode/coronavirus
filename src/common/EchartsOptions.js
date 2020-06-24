@@ -187,9 +187,11 @@ const chinaMapOption = {
     // 触发类型, 数据项图形触发
     trigger: 'item',
     enterable: true,
-    // 使用函数模板，传入的数据值 ——> value: number | Array
-    formatter: '{b0} : {c0} <br /> <div onclick="__chinaMapToolTipClicked()"></div>',
-
+    formatter: function (params) {
+      console.log(1111, params)
+      let tip = params.name + '：' + params.value;
+      return '<div onclick=__chinaMapToolTipClicked(' + JSON.stringify(params.name) + ')>' + tip + '</div>'
+    }
   },
   // 视觉映射组件
   visualMap: {
@@ -214,7 +216,6 @@ const chinaMapOption = {
       // 系列名称，用于tooltip的显示，legend 的图例筛选 在 setOption 更新数据和配置项时用于指定对应的系列
       map: 'china',
       // 地图类型
-      // mapType: 'province',
       // 是否开启鼠标缩放和平移漫游 默认不开启
       // 如果只想要开启缩放或者平移，可以设置成 'scale' 或者 'move' 设置成 true 为都开启
       roam: false,

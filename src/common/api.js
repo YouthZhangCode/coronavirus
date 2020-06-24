@@ -122,7 +122,7 @@ const api = {
   }
 };
 
-const collection: any = {};
+const collection = {};
 for (let key in api) {
   if (key === "access" || env === "prod") {
     collection[key] = api[key][env];

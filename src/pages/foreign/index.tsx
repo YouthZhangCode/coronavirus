@@ -18,12 +18,25 @@ const tableHeaderStyle = {
   item4: {width: '11.2vw', background:'#f3f6f8', color:'#4e5a65'},
 }
 
-export default
-@inject('homeStore', 'foreignStore')
-@observer
-class Foreign extends Component {
+interface ForeignProps {
+  foreignStore: any
+  homeStore: any
+  history: any
+  routeStore: any
+}
 
-  constructor(props) {
+interface ForeignState {
+  hideFixedHeader: boolean
+  foreignStatisIndex: number
+}
+
+@inject('homeStore', 'foreignStore', 'routeStore')
+@observer
+class Foreign extends Component<ForeignProps, ForeignState> {
+
+  tableHeaderOffsetTop: any;
+
+  constructor(props:ForeignProps) {
     super(props)
     this.state = {
       hideFixedHeader: true,
@@ -32,6 +45,8 @@ class Foreign extends Component {
   }
 
   componentDidMount() {
+    this.props.routeStore.setSlideIndex(1);
+
     this.props.foreignStore.loadForeignCountriesData()
     this.props.foreignStore.loadEuropeCountriesData();
     this.props.foreignStore.loadAsiaCountriesData();
@@ -55,7 +70,7 @@ class Foreign extends Component {
   }
 
   componentDidUpdate() {
-    this.tableHeaderOffsetTop = document.getElementById('tableHeader').offsetTop - 0.11733*(window.innerWidth);
+    this.tableHeaderOffsetTop = document.getElementById('tableHeader')!.offsetTop - 0.11733*(window.innerWidth);
   }
 
   componentWillUnmount() {
@@ -248,7 +263,7 @@ class Foreign extends Component {
         {
           this.state.foreignStatisIndex === 1
           ? <MyTable showChildren={true} headerContents={[]} childrenContents={this.props.foreignStore.countryListData}/>
-          : this.props.foreignStore.continentListData.map((continent, index) =>
+          : this.props.foreignStore.continentListData.map((continent:any, index:number) =>
               <MyTable key={index} headerContents={continent.headerContents} childrenContents={continent.childrenContents}/>
             )
         }
@@ -256,3 +271,5 @@ class Foreign extends Component {
     )
   }
 }
+
+export default Foreign;

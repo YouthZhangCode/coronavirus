@@ -5,8 +5,10 @@
  */
 import Home from './home'
 import Foreign from './foreign'
+import Province from './province'
 
 export {
   Home,
   Foreign,
+  Province,
 }
