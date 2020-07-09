@@ -7,16 +7,18 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import homeStore from './stores/homeStore';
 import foreignStore from './stores/foreignStore';
-import routeStore from './stores/routeStore';
+import provinceStore from './stores/provinceStore';
 
 const stores = {
   homeStore,
   foreignStore,
-  routeStore,
+  provinceStore,
 }
 
 homeStore.loadRecentData()
 homeStore.loadTodayNotice()
+homeStore.loadTodayData()
+
 foreignStore.loadForeignData()
 foreignStore.loadForeignCountriesData()
 foreignStore.loadEuropeCountriesData();

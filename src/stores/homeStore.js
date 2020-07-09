@@ -8,6 +8,16 @@ import { observable, action } from 'mobx'
 import agent from '../agent'
 import foreignStore from './foreignStore'
 import * as EchartsOptions from '../common/EchartsOptions'
+import provinceStore from "./provinceStore"
+
+const provinceHeaderLayOut = {
+  item0: {width: '22.4vw', fontSize:'3.733vw', color:'#222'},
+  item1: {width: '14.2vw', fontSize:'3.733vw', color:'#222'},
+  item2: {width: '16vw', fontSize:'3.733vw', color:'#222'},
+  item3: {width: '13vw', fontSize:'3.733vw', color:'#222'},
+  item4: {width: '11.2vw', fontSize:'3.733vw', color:'#222'},
+  item5: { fontSize:'3.733vw', color:'#005def'},
+}
 
 export class HomeStore {
 
@@ -42,6 +52,8 @@ export class HomeStore {
   @observable importedAddOption = EchartsOptions.importedAdd;
   @observable importedTotalOption = EchartsOptions.importedTotal;
 
+  @observable areaList = [];
+
   areaTableLayOut = {
     item0: `${22.4 / 89.333 * 100}%`,
     item1: `${15.467 / 89.333 * 100}%`,
@@ -49,6 +61,16 @@ export class HomeStore {
     item3: `${12 / 89.333 * 100}%`,
     item4: `${12 / 89.333 * 100}%`
   }
+
+  provinceTableLayOut = {
+    item0: {width: '20vw', color:'#222' },
+    item1: {width: '18.9vw', color:'#005dff' },
+    item2: {width: '18.9vw',  color:'#222' },
+    item3: {width: '13.867vw',color:'#222' },
+    item4: { color:'#222' },
+
+  }
+
 
   @action loadTodayData() {
     return agent.Home.todayData()
@@ -67,12 +89,15 @@ export class HomeStore {
               this.isShowAdd = isShowAdd;
               this.showAddSwitch = showAddSwitch;
               this.areaTree = areaTree;
+              this.updateAreaList();
               this.chinaMapNowData = areaTree[0] && areaTree[0].children.map(item => {
                 return {...item, value: item.total.confirm - item.total.dead - item.total.heal}
               })
               this.chinaMapTotalData = areaTree[0] && areaTree[0].children.map(item => {
                 return {...item, value: item.total.confirm}
               })
+
+              EchartsOptions.chinaMapOption.series[0].data = this.chinaMapNowData;
 
               this.chinaTree = this.areaTree[0] &&
                 this.areaTree[0].children.map(item =>{
@@ -274,6 +299,25 @@ export class HomeStore {
       .then(action(data => {
         this.todayNotice = data
       }))
+  }
+
+  @action updateAreaList() {
+    let provinces = this.areaTree[0] ? this.areaTree[0].children : []
+    let areas = [];
+    for(let province of provinces) {
+      if (province.name === provinceStore.province) {
+        areas = province.children;
+      }
+    }
+    this.areaList = areas.map((item, index)=>{
+      return [
+        {content: item.name, style:this.provinceTableLayOut.item0},
+        {content: item.today.confirm, style:this.provinceTableLayOut.item1},
+        {content: item.total.confirm, style:this.provinceTableLayOut.item2},
+        {content: item.total.heal, style:this.provinceTableLayOut.item3},
+        {content: item.total.dead, style:this.provinceTableLayOut.item4},
+      ]
+    })
   }
 
   chinaTreeDetailClicked(area) {

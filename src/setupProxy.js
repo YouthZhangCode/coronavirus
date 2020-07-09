@@ -12,4 +12,9 @@ module.exports = function (app) {
       "target": "https://view.inews.qq.com",
       "changeOrigin": true
     }));
+  app.use('/news', createProxyMiddleware(
+    {
+      "target": "https://mat1.gtimg.com",
+      "changeOrigin": true,
+    }));
 }

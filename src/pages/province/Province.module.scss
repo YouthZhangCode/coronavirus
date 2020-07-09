@@ -91,6 +91,7 @@
 }
 
 .topDataWrap {
+  margin-bottom: 4vw;
   .timeNum {
     position: relative;
     padding: 5.333vw 5.333vw 4vw;
@@ -142,5 +143,17 @@
   }
 }
 
-
+.chartWrap {
+  margin-top: 4vw;
+}
+.title {
+  font-size: 3.733vw;
+  color: #222;
+  font-weight: 500;
+}
+.description {
+  font-size: 3.2vw;
+  color: #737373;
+  margin:1vw 0 3vw;
+}
 

@@ -12,8 +12,8 @@ import moduleScss from './Header.module.scss'
 
 const Header = observer((props) => {
 
-  const { routeStore } = useStores();
-
+  const {provinceStore } = useStores();
+  let slideIndex = 0;
   return(
     <div>
       <div className={moduleScss.navHide}>
@@ -23,44 +23,44 @@ const Header = observer((props) => {
               <div onClick={() => {
                 itemSelected(0)
               }}
-                   className={`${moduleScss.navItem} ${moduleScss.itemHome} ${routeStore.slideIndex === 0 && moduleScss.active}`}>国内疫情
+                   className={`${moduleScss.navItem} ${moduleScss.itemHome} ${slideIndex === 0 && moduleScss.active}`}>国内疫情
               </div>
               <div onClick={() => {
                 itemSelected(1)
               }}
-                   className={`${moduleScss.navItem} ${moduleScss.itemForeign} ${routeStore.slideIndex === 1 && moduleScss.active}`}>海外疫情
+                   className={`${moduleScss.navItem} ${moduleScss.itemForeign} ${slideIndex === 1 && moduleScss.active}`}>海外疫情
               </div>
               <div onClick={() => {
                 itemSelected(2)
               }}
-                   className={`${moduleScss.navItem} ${moduleScss.itemHubei} ${routeStore.slideIndex === 2 && moduleScss.active}`}>{`${routeStore.province}疫情`}</div>
+                   className={`${moduleScss.navItem} ${moduleScss.itemHubei} ${slideIndex === 2 && moduleScss.active}`}>{`${provinceStore.province}疫情`}</div>
               <div onClick={() => {
                 itemSelected(3)
-              }} className={`${moduleScss.navItem} ${routeStore.slideIndex === 3 && moduleScss.active}`}>最新进展
+              }} className={`${moduleScss.navItem} ${slideIndex === 3 && moduleScss.active}`}>最新进展
               </div>
               <div onClick={() => {
                 itemSelected(4)
-              }} className={`${moduleScss.navItem} ${routeStore.slideIndex === 4 && moduleScss.active}`}>定点医院
+              }} className={`${moduleScss.navItem} ${slideIndex === 4 && moduleScss.active}`}>定点医院
               </div>
               <div onClick={() => {
                 itemSelected(5)
-              }} className={`${moduleScss.navItem} ${routeStore.slideIndex === 5 && moduleScss.active}`}>韩国疫情
+              }} className={`${moduleScss.navItem} ${slideIndex === 5 && moduleScss.active}`}>韩国疫情
               </div>
               <div onClick={() => {
                 itemSelected(6)
-              }} className={`${moduleScss.navItem} ${routeStore.slideIndex === 6 && moduleScss.active}`}>病患轨迹
+              }} className={`${moduleScss.navItem} ${slideIndex === 6 && moduleScss.active}`}>病患轨迹
               </div>
               <div onClick={() => {
                 itemSelected(7)
-              }} className={`${moduleScss.navItem} ${routeStore.slideIndex === 7 && moduleScss.active}`}>较真辟谣
+              }} className={`${moduleScss.navItem} ${slideIndex === 7 && moduleScss.active}`}>较真辟谣
               </div>
               <div onClick={() => {
                 itemSelected(8)
-              }} className={`${moduleScss.navItem} ${routeStore.slideIndex === 8 && moduleScss.active}`}>复工信息
+              }} className={`${moduleScss.navItem} ${slideIndex === 8 && moduleScss.active}`}>复工信息
               </div>
               <div onClick={() => {
                 itemSelected(9)
-              }} className={`${moduleScss.navItem} ${routeStore.slideIndex === 9 && moduleScss.active}`}>交通信息
+              }} className={`${moduleScss.navItem} ${slideIndex === 9 && moduleScss.active}`}>交通信息
               </div>
             </div>
           </div>
@@ -75,7 +75,7 @@ const Header = observer((props) => {
     } else if (index === 1) {
       props.history.push('/foreign')
     } else if (index === 2) {
-      props.history.push('/province/' + routeStore.province)
+      props.history.push('/province/' + provinceStore.province)
     }
   }
 

@@ -18,7 +18,7 @@ let chinaMap, tableHeaderOffsetTop;
 
 const Home = observer((props) => {
 
-  const { homeStore, foreignStore, routeStore } = useStores();
+  const { homeStore, foreignStore } = useStores();
 
   global.__chinaMapToolTipClicked = (province)=>{
     props.history.push(`./province/${province}`)
@@ -28,19 +28,6 @@ const Home = observer((props) => {
     // 国内疫情地图
     chinaMap = echarts.init(document.getElementById('chinaMap'));
     chinaMap.setOption(EchartsOptions.chinaMapOption)
-
-    routeStore.setSlideIndex(0);
-    homeStore.loadTodayData()
-      .then(res => {
-        chinaMap.setOption({
-          series: [
-            {
-              data: homeStore.chinaMapNowData
-            }
-          ],
-        })
-      })
-
 
   },[])
 
@@ -117,7 +104,7 @@ const Home = observer((props) => {
           <div className={moduleScss.marqueeWarp}>
             <div className={moduleScss.marquee}>
               <div className={moduleScss.marqueeTab}>
-                <a href='#'>{homeStore.todayNotice.length > 0 && homeStore.todayNotice[0]['showNotice']}</a>
+                <a href='sandbaobrowse://sandbao/qrcode'>{homeStore.todayNotice.length > 0 && homeStore.todayNotice[0]['showNotice']}</a>
               </div>
             </div>
           </div>

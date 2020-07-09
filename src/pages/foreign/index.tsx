@@ -22,7 +22,6 @@ interface ForeignProps {
   foreignStore: any
   homeStore: any
   history: any
-  routeStore: any
 }
 
 interface ForeignState {
@@ -30,7 +29,7 @@ interface ForeignState {
   foreignStatisIndex: number
 }
 
-@inject('homeStore', 'foreignStore', 'routeStore')
+@inject('homeStore', 'foreignStore')
 @observer
 class Foreign extends Component<ForeignProps, ForeignState> {
 
@@ -45,7 +44,6 @@ class Foreign extends Component<ForeignProps, ForeignState> {
   }
 
   componentDidMount() {
-    this.props.routeStore.setSlideIndex(1);
 
     this.props.foreignStore.loadForeignCountriesData()
     this.props.foreignStore.loadEuropeCountriesData();

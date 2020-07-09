@@ -34,6 +34,8 @@ const parse = res => {
       }else {
         return resObj.data
       }
+    } else {
+      return resObj;
     }
   }
 }
@@ -89,7 +91,9 @@ const Foreign = {
 
 const Province = {
   provinceJson: (province) =>
-    request.get('https://mat1.gtimg.com', `/news/feiyanarea/${province}.json`)
+    request.get('', `/news/feiyanarea/${province}.json`),
+  provinceDailyList: (province) =>
+    request.get('https://api.inews.qq.com', `/newsqa/v1/query/pubished/daily/list?province=${province}`),
 }
 
 export default {
