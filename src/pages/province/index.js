@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { observer } from 'mobx-react';
 
-import {MyTable, MyTableHeader, RecentNum} from '../../components';
+import {MyTable, MyTableHeader, RecentNum, EchartWrap, AreaNewsItem} from '../../components';
 import { useStores } from "../../hocks"
 
 import moduleScss from './Province.module.scss';
 import homeModuleScss from '../home/Home.module.scss';
-import EchartWrap from "../../components/business/EchartWrap"
 
 let provinceMap, areaTableHeaderOffsetTop;
 
@@ -17,6 +16,7 @@ const Province = observer((props) => {
   useEffect(()=>{
     provinceStore.setProvince(props.match.params.id);
     provinceStore.updateProvinceDailyList();
+    provinceStore.requestNews(10);
     homeStore.updateAreaList();
 
   },[props.match.params.id])
@@ -47,8 +47,7 @@ const Province = observer((props) => {
       {_renderLinks()}
       {_renderTrendCharts()}
       {_renderAreaList()}
-
-      <div style={{height:'300px', backgroundColor:'#ddd'}}>12</div>
+      {_renderNews()}
     </div>
   )
 
@@ -192,6 +191,22 @@ const Province = observer((props) => {
         ]}/>
     )
   }
+
+  function _renderNews() {
+    return(
+      <div className={moduleScss.newsWrap}>
+        <div>
+          <span className={moduleScss.areaTitle}>{`${provinceStore.province}疫情`}</span>
+          <ul>
+            {provinceStore.news.map((item, index)=>{
+              return <AreaNewsItem key={index} {...item} />
+            })}
+          </ul>
+        </div>
+      </div>
+    )
+  }
+
 
 })
 

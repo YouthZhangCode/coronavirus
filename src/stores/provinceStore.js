@@ -15,6 +15,8 @@ export class ProvinceStore {
   @observable provinceMapNowData = [];
   @observable provinceMapTotalData = [];
 
+  @observable news = [];
+
   @action setProvince(province) {
     this.province = province;
   }
@@ -59,6 +61,14 @@ export class ProvinceStore {
         })
 
 
+      }))
+  }
+
+  @action requestNews(size) {
+    agent.Province.news('bj', size)
+      .then(action(res=>{
+        console.log('news ---- ', res)
+        this.news = res.data.items;
       }))
   }
 

@@ -156,4 +156,27 @@
   color: #737373;
   margin:1vw 0 3vw;
 }
+.newsWrap {
+  margin: 2*$padding1;
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .areaTitle {
+    font-size: 4.267vw;
+    font-weight: 500;
+    color: #222;
+    position: relative;
+    &:before {
+      @include centerVerticalAbsolute;
+      width: 8.533vw;
+      height: 4.8vw;
+      background: url(https://mat1.gtimg.com/news/feiyanarea/icon_subao.png);
+      background-size: 100% 100%;
+      right: -9.067vw;
 
+    }
+  }
+
+}

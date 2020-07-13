@@ -3,11 +3,13 @@
  * @Date: 2020/3/11 10:50 AM
  * @Author: Youth
  */
+import { MyTableHeader, MyTable } from './basic/MyTable'
+
 import Header from './business/Header'
 import RecentNum from './business/RecentNum'
 import EchartWrap from './business/EchartWrap'
 import CarouselWrap from './business/CarouselWrap'
-import { MyTableHeader, MyTable } from './basic/MyTable'
+import AreaNewsItem from './business/AreaNewsItem'
 
 export {
   // basic
@@ -19,4 +21,5 @@ export {
   Header,
   RecentNum,
   CarouselWrap,
+  AreaNewsItem,
 }

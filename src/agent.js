@@ -94,6 +94,8 @@ const Province = {
     request.get('', `/news/feiyanarea/${province}.json`),
   provinceDailyList: (province) =>
     request.get('https://api.inews.qq.com', `/newsqa/v1/query/pubished/daily/list?province=${province}`),
+  news:(province, size) =>
+    request.get('https://api.dreamreader.qq.com', `/news/v1/province/news/list?province_code=${province}&page_size=${size}`)
 }
 
 export default {

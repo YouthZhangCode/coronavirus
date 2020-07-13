@@ -22,9 +22,11 @@ export default class EchartWrap extends Component<EchartWrapProps, {}> {
     height: '45vw',
   }
 
-  // UNSAFE_componentWillReceiveProps(nextProps) {
-  //   this.chart.setOption(nextProps.option)
-  // }
+  UNSAFE_componentWillReceiveProps(nextProps:any) {
+    // if (nextProps.option.xAxis !== this.props.option.xAxis) {
+      this.chart.setOption(nextProps.option)
+    // }
+  }
 
   componentDidMount() {
     let a = document.getElementById(this.props.option._id) as HTMLDivElement;
