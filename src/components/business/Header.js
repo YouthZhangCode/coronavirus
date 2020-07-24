@@ -3,7 +3,7 @@
  * @Date: 2020/3/11 10:08 AM
  * @Author: Youth
  */
-import React, {Component} from 'react'
+import React, {Component, useEffect, useState } from 'react'
 import {withRouter} from 'react-router'
 import { observer } from 'mobx-react'
 
@@ -12,8 +12,22 @@ import moduleScss from './Header.module.scss'
 
 const Header = observer((props) => {
 
+  const [slideIndex, setSlideIndex] = useState(0);
+  useEffect(()=>{
+    props.history.listen((route)=>{
+      let pathname = route.pathname, index = 0;
+      if (pathname === '/') {
+        index = 0;
+      } else if (pathname === '/foreign') {
+        index = 1;
+      } else if (pathname.indexOf('/province') !== -1) {
+        index = 2;
+      }
+      setSlideIndex(index);
+    })
+  },[])
+
   const {provinceStore } = useStores();
-  let slideIndex = 0;
   return(
     <div>
       <div className={moduleScss.navHide}>
