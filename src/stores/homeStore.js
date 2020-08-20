@@ -137,8 +137,8 @@ export class HomeStore {
       .then(action(({
                       chinaDayList,
                       chinaDayAddList,
-                      dailyNewAddHistory,
-                      dailyHistory,
+                      dailyNewAddHistory=[],
+                      dailyHistory=[],
                       wuhanDayList,
                       articleList,
                       provinceCompare,
